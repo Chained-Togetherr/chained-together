@@ -21,6 +21,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
   // Drag / swipe state
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [releaseOffset, setReleaseOffset] = useState<number | null>(null);
 
   const dragStartX = useRef<number | null>(null);
   const dragStartY = useRef<number | null>(null);
@@ -38,6 +39,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
       setDragOffset(0);
       setIsDragging(false);
       setIsAnimating(false);
+      setReleaseOffset(null);
       dragStartX.current = null;
       hasMoved.current = false;
       isHorizontalScroll.current = null;
@@ -53,12 +55,20 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
   const totalImages = images.length;
   const hasMultiple = totalImages > 1;
 
-  const goTo = (index: number, dir: 1 | -1) => {
+  const goTo = (index: number, dir: 1 | -1, fromDragPx?: number) => {
     if (isAnimating) return;
     setIsAnimating(true);
     setDirection(dir);
+    if (fromDragPx !== undefined) {
+      setReleaseOffset(fromDragPx);
+    } else {
+      setReleaseOffset(null);
+    }
     setCurrentImageIndex((index + totalImages) % totalImages);
-    setTimeout(() => setIsAnimating(false), 320);
+    setTimeout(() => {
+      setIsAnimating(false);
+      setReleaseOffset(null);
+    }, 400);
   };
 
   const goPrev = (e: React.MouseEvent) => {
@@ -124,9 +134,11 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
     if (dragStartX.current === null || !hasMultiple) return;
     const dx = e.clientX - dragStartX.current;
     const threshold = Math.min(containerWidth.current * 0.25, 80);
+    const cw = containerWidth.current || 1;
     if (hasMoved.current && Math.abs(dx) > threshold && isHorizontalScroll.current !== false) {
-      if (dx < 0) goTo(currentImageIndex + 1, 1);
-      else goTo(currentImageIndex - 1, -1);
+      const offsetPx = dx;
+      if (dx < 0) goTo(currentImageIndex + 1, 1, offsetPx);
+      else goTo(currentImageIndex - 1, -1, offsetPx);
     }
     setDragOffset(0);
     setIsDragging(false);
@@ -185,8 +197,9 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
     const dx = touch.clientX - dragStartX.current;
     const threshold = Math.min(containerWidth.current * 0.25, 80);
     if (hasMoved.current && Math.abs(dx) > threshold && isHorizontalScroll.current !== false) {
-      if (dx < 0) goTo(currentImageIndex + 1, 1);
-      else goTo(currentImageIndex - 1, -1);
+      const offsetPx = dx;
+      if (dx < 0) goTo(currentImageIndex + 1, 1, offsetPx);
+      else goTo(currentImageIndex - 1, -1, offsetPx);
     }
     setDragOffset(0);
     setIsDragging(false);
@@ -218,16 +231,26 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
   };
 
   // Gallery-style slide variants — only image slides, not entire modal
+  const cw = containerWidth.current || 1;
   const slideVariants = {
-    enter: (dir: number) => ({
-      x: dir > 0 ? "100%" : "-100%",
-    }),
+    enter: (dir: number) => {
+      // If coming from a drag release, start from where the drag left off
+      if (releaseOffset !== null) {
+        // The entering image was peeking: its position = 100% + dragOffset (for next) or -100% + dragOffset (for prev)
+        const pxOffset = dir > 0
+          ? cw + releaseOffset   // releaseOffset is negative when swiping left
+          : -cw + releaseOffset; // releaseOffset is positive when swiping right
+        return { x: pxOffset };
+      }
+      return { x: dir > 0 ? cw : -cw };
+    },
     center: {
       x: 0,
     },
-    exit: (dir: number) => ({
-      x: dir > 0 ? "-100%" : "100%",
-    }),
+    exit: (dir: number) => {
+      // Always slide fully off-screen so the old image stays visible until covered
+      return { x: dir > 0 ? -cw : cw };
+    },
   };
 
   return (
@@ -300,8 +323,8 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                   onTouchMove={onTouchMove}
                   onTouchEnd={onTouchEnd}
                 >
-                  {/* Slide strip — gallery-style: only images animate */}
-                  <AnimatePresence mode="popLayout" custom={direction}>
+                  {/* Slide strip — both entering and exiting images visible simultaneously */}
+                  <AnimatePresence initial={false} custom={direction}>
                     <motion.div
                       key={currentImageIndex}
                       custom={direction}
@@ -312,7 +335,9 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                       transition={{
                         x: isDragging
                           ? { duration: 0 }
-                          : { duration: 0.28, ease: [0.32, 0, 0.67, 0] },
+                          : releaseOffset !== null
+                            ? { type: "spring" as const, stiffness: 300, damping: 30, mass: 0.8 }
+                            : { type: "spring" as const, stiffness: 350, damping: 30 },
                       }}
                       className="absolute inset-0"
                       style={{
@@ -336,7 +361,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                     </motion.div>
                   </AnimatePresence>
 
-                  {/* Ghost image while dragging */}
+                  {/* Ghost image while dragging — peeking next/prev */}
                   {isDragging && hasMultiple && dragOffset !== 0 && (
                     <div
                       className="absolute inset-0"

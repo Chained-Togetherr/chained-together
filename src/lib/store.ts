@@ -1,5 +1,13 @@
 // Product and Cart Store
 import productHuruf from "@/assets/product/product-huruf.jpg";
+import huruf1 from "@/assets/product/huruf/f1.jpeg";
+import huruf2 from "@/assets/product/huruf/f2.jpeg";
+import huruf3 from "@/assets/product/huruf/f3.jpeg";
+import huruf4 from "@/assets/product/huruf/f4.jpeg";
+import huruf5 from "@/assets/product/huruf/f5.jpeg";
+import huruf6 from "@/assets/product/huruf/f6.jpeg";
+
+
 import productCherry from "@/assets/product/product-cherry.jpg";
 import productBunga from "@/assets/product/product-bunga.jpg";
 
@@ -35,7 +43,7 @@ export const products: Product[] = [
     name: "Keychain Custom Huruf A-Z",
     price: 7000,
     image: productHuruf,
-    //images: [productHuruf, productCherry],
+    images: [productHuruf, huruf1, huruf2, huruf3, huruf4, huruf5, huruf6],
     hasVariants: true,
     letterOptions: Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)),
     bellOption: true,
