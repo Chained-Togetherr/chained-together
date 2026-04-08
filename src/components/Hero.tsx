@@ -92,7 +92,6 @@ const Hero = () => {
               WebkitTextFillColor: "transparent",
             }}
           >
-            Custom & Estetik
           </motion.h2>
 
           <motion.p

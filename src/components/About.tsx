@@ -6,18 +6,18 @@ const About = () => {
   const features = [
     {
       icon: Heart,
-      title: "Handmade with Love",
-      description: "Setiap produk dibuat dengan penuh ketelitian dan cinta, bukan produksi massal.",
+      title: "Handmade",
+      description: "Setiap produk dibuat dengan tangan sendiri.",
     },
     {
       icon: Sparkles,
-      title: "Custom Design",
-      description: "Personalisasi huruf dan aksesoris sesuai keinginanmu untuk sentuhan unik.",
+      title: "Custom",
+      description: "Personalisasi huruf sesuai keinginanmu untuk sentuhan unik.",
     },
     {
       icon: Star,
-      title: "Premium Quality",
-      description: "Material berkualitas tinggi dipilih untuk ketahanan dan keindahan yang maksimal.",
+      title: "Quality",
+      description: "Material dipilih untuk keindahan yang maksimal.",
     },
   ];
 
@@ -51,8 +51,8 @@ const About = () => {
             style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 300, lineHeight: 1.85 }}
           >
             Chained Together adalah bisnis aksesoris handmade yang berfokus pada gantungan kunci custom berkualitas tinggi.
-            Kami percaya aksesoris kecil bisa membawa kebahagiaan besar — setiap produk dirancang dengan estetika modern
-            dan sentuhan personal yang membuat momen harianmu lebih istimewa.
+            Kami percaya aksesoris kecil bisa membawa kebahagiaan besar. setiap produk dirancang dengan estetika dan modern
+            membuat momen harianmu lebih istimewa.
           </p>
         </motion.div>
 
