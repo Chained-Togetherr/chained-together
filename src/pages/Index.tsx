@@ -1,0 +1,28 @@
+import React, { useState } from "react";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Products from "@/components/Products";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import CartModal from "@/components/CartModal";
+
+const Index = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar onCartClick={() => setIsCartOpen(true)} />
+      <main>
+        <Hero />
+        <About />
+        <Products />
+        <Contact />
+      </main>
+      <Footer />
+      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+    </div>
+  );
+};
+
+export default Index;

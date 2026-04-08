@@ -1,0 +1,1 @@
+Di buat oleh RIZKY MAULANA PUTRA (BadutZY), CLAUDE AI & LOVABLE AI
