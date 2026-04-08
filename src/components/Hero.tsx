@@ -50,81 +50,85 @@ const Hero = () => {
         style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E\")", backgroundSize: "180px" }} />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center">
+      <div className="relative z-10 container mx-auto px-6 text-center w-full">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto flex flex-col items-center"
         >
+          {/* Label */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
-            className="flex items-center justify-center gap-2 mb-8"
+            className="flex items-center justify-center gap-2 mb-6 md:mb-8"
           >
-            <div className="h-px w-10 bg-white/40" />
-            <span className="text-white/75 text-xs tracking-[0.22em] uppercase font-medium" style={{ fontFamily: "DM Sans, sans-serif" }}>
+            <div className="h-px w-8 md:w-10 bg-white/40" />
+            <span
+              className="text-white/75 tracking-[0.18em] md:tracking-[0.22em] uppercase font-medium text-center"
+              style={{ fontFamily: "DM Sans, sans-serif", fontSize: "0.65rem" }}
+            >
               Aksesoris Premium Handmade
             </span>
-            <div className="h-px w-10 bg-white/40" />
+            <div className="h-px w-8 md:w-10 bg-white/40" />
           </motion.div>
 
+          {/* Main title */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.8 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-light text-white mb-4 leading-[1.05] tracking-tight"
-            style={{ fontFamily: "Cormorant Garamond, Georgia, serif" }}
+            className="font-light text-white leading-[1.05] tracking-tight mb-4 md:mb-3 w-full"
+            style={{
+              fontFamily: "Cormorant Garamond, Georgia, serif",
+              fontSize: "clamp(2.6rem, 10vw, 5rem)",
+            }}
           >
             Gantungan Kunci
           </motion.h1>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-semibold italic mb-8 leading-[1.05]"
-            style={{
-              fontFamily: "Cormorant Garamond, Georgia, serif",
-              background: "linear-gradient(135deg, #ffd6e0, #f0c4d4, #e8bde0)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-          </motion.h2>
-
+          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.65, duration: 0.7 }}
-            className="text-white/70 text-base md:text-lg mb-12 max-w-lg mx-auto leading-relaxed"
-            style={{ fontFamily: "DM Sans, sans-serif", fontWeight: 300 }}
+            className="text-white/70 mb-10 md:mb-12 leading-relaxed mx-auto text-center"
+            style={{
+              fontFamily: "DM Sans, sans-serif",
+              fontWeight: 300,
+              fontSize: "clamp(0.85rem, 3.5vw, 1.05rem)",
+              maxWidth: "min(90%, 480px)",
+            }}
           >
-            Koleksi gantungan kunci estetik dibuat dengan penuh cinta. 
+            Koleksi gantungan kunci estetik dibuat dengan penuh cinta.{" "}
             Personalisasi dengan huruf dan aksesoris pilihanmu.
           </motion.p>
 
+          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.7 }}
-            className="flex items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full"
           >
             <motion.button
               onClick={scrollToProducts}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="group inline-flex items-center gap-3 px-8 py-3.5 rounded-full font-medium text-sm tracking-wide transition-all duration-300"
+              className="group inline-flex items-center justify-center gap-3 rounded-full font-medium tracking-wide transition-all duration-300 w-full sm:w-auto"
               style={{
                 background: "linear-gradient(135deg, hsl(345 55% 68%), hsl(275 35% 60%))",
                 color: "white",
                 boxShadow: "0 8px 32px -4px hsl(345 55% 68% / 0.5)",
                 fontFamily: "DM Sans, sans-serif",
                 letterSpacing: "0.04em",
+                fontSize: "0.85rem",
+                padding: "0.875rem 2rem",
+                maxWidth: "260px",
               }}
             >
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="w-4 h-4 flex-shrink-0" />
               Lihat Koleksi
             </motion.button>
 
@@ -132,8 +136,14 @@ const Hero = () => {
               onClick={() => document.querySelector("#tentang")?.scrollIntoView({ behavior: "smooth" })}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm tracking-wide text-white/90 border border-white/25 hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-              style={{ fontFamily: "DM Sans, sans-serif", letterSpacing: "0.04em" }}
+              className="inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-wide text-white/90 border border-white/25 hover:bg-white/10 hover:border-white/40 transition-all duration-300 w-full sm:w-auto"
+              style={{
+                fontFamily: "DM Sans, sans-serif",
+                letterSpacing: "0.04em",
+                fontSize: "0.85rem",
+                padding: "0.875rem 2rem",
+                maxWidth: "260px",
+              }}
             >
               Tentang Kami
             </motion.button>
@@ -144,9 +154,14 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            className="mt-12 md:mt-0 md:absolute md:bottom-10 md:left-1/2 md:-translate-x-1/2 flex flex-col items-center gap-2"
           >
-            <span className="text-white/40 text-xs tracking-widest uppercase" style={{ fontFamily: "DM Sans, sans-serif", fontSize: "0.65rem" }}>Scroll</span>
+            <span
+              className="text-white/40 uppercase"
+              style={{ fontFamily: "DM Sans, sans-serif", fontSize: "0.6rem", letterSpacing: "0.18em" }}
+            >
+              Scroll
+            </span>
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}

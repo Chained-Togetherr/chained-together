@@ -24,6 +24,10 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const navLinks = [
     { name: "Home", href: "#home", type: "section" },
     { name: "Tentang", href: "#tentang", type: "section" },
@@ -31,47 +35,68 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
     { name: "Kontak", href: "#kontak", type: "section" },
   ];
 
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (!element) return;
+    const navbarHeight = 80;
+    const elementPosition =
+      element.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({ top: elementPosition - navbarHeight, behavior: "smooth" });
+  };
+
   const handleNavClick = (link: { name: string; href: string; type: string }) => {
+    // Close mobile menu
     setIsMobileMenuOpen(false);
+
     if (link.type === "route") {
       navigate(link.href);
+      return;
+    }
+
+    if (isProductsPage) {
+      navigate("/");
+      setTimeout(() => {
+        scrollToSection(link.href);
+      }, 400);
     } else {
-      if (isProductsPage) {
-        navigate("/");
-        setTimeout(() => {
-          const element = document.querySelector(link.href);
-          if (!element) return;
-          const navbarHeight = 80;
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-          window.scrollTo({ top: elementPosition - navbarHeight, behavior: "smooth" });
-        }, 350);
-      } else {
-        const element = document.querySelector(link.href);
-        if (!element) return;
-        const navbarHeight = 80;
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({ top: elementPosition - navbarHeight, behavior: "smooth" });
-      }
+      // Small delay to let menu close animation start, then scroll
+      setTimeout(() => {
+        scrollToSection(link.href);
+      }, 50);
     }
   };
 
-  // Adaptive styles: on products page (light bg), show light glass when not scrolled
   const isLight = isProductsPage && !isScrolled;
-  const navBg = isScrolled ? "glass-dark" : isProductsPage ? "navbar-light" : "bg-transparent";
+  const navBg = isScrolled
+    ? "glass-dark"
+    : isProductsPage
+    ? "navbar-light"
+    : "bg-transparent";
   const logoTextColor = isLight ? "text-foreground" : "text-white";
-  const linkColor = isLight ? "text-foreground/60 hover:text-foreground" : "text-white/75 hover:text-white";
-  const iconColor = isLight ? "text-foreground/60 hover:text-foreground" : "text-white/80 hover:text-white";
+  const linkColor = isLight
+    ? "text-foreground/60 hover:text-foreground"
+    : "text-white/75 hover:text-white";
+  const iconColor = isLight
+    ? "text-foreground/60 hover:text-foreground"
+    : "text-white/80 hover:text-white";
   const mobileMenuBorder = isLight ? "border-foreground/10" : "border-white/10";
-  const mobileLinkColor = isLight ? "text-foreground/65 hover:text-foreground hover:bg-black/5" : "text-white/75 hover:text-white hover:bg-white/6";
+  const mobileLinkColor = isLight
+    ? "text-foreground/65 hover:text-foreground hover:bg-black/5"
+    : "text-white/75 hover:text-white hover:bg-white/10";
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${navBg}`}
+      className={`fixed top-0 left-0 right-0 transition-all duration-500 ${navBg}`}
+      style={{ zIndex: 9999 }}
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <button onClick={() => navigate("/")} className="flex items-center gap-2.5 group">
+          <button
+            onClick={() => navigate("/")}
+            className="flex items-center gap-2.5 group"
+            style={{ position: "relative", zIndex: 10000 }}
+          >
             <img
               src={profile}
               alt="Chained Together"
@@ -104,7 +129,10 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
           </div>
 
           {/* Cart & Mobile Menu */}
-          <div className="flex items-center gap-5">
+          <div
+            className="flex items-center gap-5"
+            style={{ position: "relative", zIndex: 10000 }}
+          >
             <button
               onClick={onCartClick}
               className={`relative p-2 transition-colors duration-300 ${iconColor}`}
@@ -125,8 +153,13 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`md:hidden p-2 transition-colors duration-300 ${iconColor}`}
+              aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMobileMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </button>
           </div>
         </div>
@@ -138,7 +171,9 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
               className="md:hidden overflow-hidden"
+              style={{ position: "relative", zIndex: 9999 }}
             >
               <div className={`py-4 space-y-1 border-t mt-1 ${mobileMenuBorder}`}>
                 {navLinks.map((link, index) => (
@@ -154,6 +189,9 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
                       fontSize: "0.72rem",
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
+                      WebkitTapHighlightColor: "transparent",
+                      touchAction: "manipulation",
+                      cursor: "pointer",
                     }}
                   >
                     {link.name}
