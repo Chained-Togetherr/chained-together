@@ -38,6 +38,56 @@
     --charcoal: 340 12% 16%;
     --taupe: 340 8% 48%;
 
+    /* Section backgrounds */
+    --section-alt-bg: 38 42% 97%;
+    --section-products-bg: 0 0% 99%;
+    --products-page-hero-gradient: linear-gradient(155deg, hsl(345 55% 97%) 0%, hsl(275 35% 96%) 50%, hsl(38 42% 97%) 100%);
+    --products-page-stats-bg: 38 42% 98%;
+    --orb-color-1: 275 35% 85%;
+    --orb-color-2: 345 55% 82%;
+    --hero-orb-1: 345 55% 68%;
+    --hero-orb-2: 275 40% 60%;
+    --hero-orb-3: 345 60% 80%;
+
+    /* Button gradients */
+    --btn-primary-gradient: linear-gradient(135deg, hsl(345 55% 68%), hsl(275 35% 60%));
+    --btn-primary-shadow: 0 8px 32px -4px hsl(345 55% 68% / 0.5);
+    --btn-cta-gradient: linear-gradient(135deg, hsl(345 55% 64%), hsl(275 35% 58%));
+    --btn-cta-shadow: 0 8px 32px -4px hsl(345 55% 68% / 0.55), 0 2px 8px -2px hsl(275 35% 60% / 0.3);
+    --btn-product-gradient: linear-gradient(135deg, hsl(345 55% 68%), hsl(345 50% 56%));
+    --btn-product-shadow: 0 3px 12px -2px hsl(345 55% 68% / 0.45);
+
+    /* Feature card icon bg */
+    --feature-icon-bg: linear-gradient(135deg, hsl(345 55% 68% / 0.12), hsl(275 35% 87% / 0.3));
+    --feature-icon-color: 345 55% 68%;
+    --feature-card-glow: radial-gradient(circle at 50% 0%, hsl(345 55% 68% / 0.05), transparent 70%);
+
+    /* Price gradient */
+    --price-gradient: linear-gradient(135deg, hsl(345 55% 60%), hsl(345 50% 52%));
+    --price-gradient-discount: linear-gradient(135deg, hsl(0 75% 50%), hsl(15 85% 45%));
+
+    /* CTA banner */
+    --cta-banner-gradient: linear-gradient(155deg, hsl(345 55% 68% / 0.08) 0%, hsl(275 35% 87% / 0.12) 50%, hsl(38 42% 97%) 100%);
+
+    /* Text gradient */
+    --text-gradient: linear-gradient(135deg, hsl(345 55% 68%), hsl(275 30% 68%));
+
+    /* Selection */
+    --selection-bg: 345 55% 68%;
+    --selection-text: 345 50% 32%;
+
+    /* Scrollbar */
+    --scrollbar-thumb: 345 30% 80%;
+    --scrollbar-thumb-hover: 345 45% 65%;
+
+    /* Section decorative lines */
+    --section-line-color: 345 30% 80%;
+
+    /* Nav light bg */
+    --navbar-light-bg: rgba(255, 252, 250, 0.82);
+    --navbar-light-border: hsl(345 55% 88% / 0.35);
+    --navbar-light-shadow: 0 1px 20px -4px hsl(345 55% 68% / 0.08);
+
     --gradient-hero: linear-gradient(155deg, hsl(345 55% 68% / 0.9) 0%, hsl(275 35% 60% / 0.8) 50%, hsl(345 50% 56% / 0.85) 100%);
     --gradient-footer: linear-gradient(135deg, hsl(340 14% 12%), hsl(275 20% 17%));
     --gradient-instagram: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
@@ -72,18 +122,558 @@
   }
 }
 
+/* ══════════════════════════════════════════════════════════
+   SEASONAL THEME OVERRIDES — COMPREHENSIVE
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Lebaran: Hijau, Emas, Putih ── */
+.theme-lebaran {
+  --background: 140 15% 98%;
+  --foreground: 145 20% 14%;
+  --card: 140 10% 100%;
+  --card-foreground: 145 20% 14%;
+  --primary: 145 45% 38%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 42 40% 92%;
+  --secondary-foreground: 145 30% 18%;
+  --muted: 140 18% 95%;
+  --muted-foreground: 145 12% 42%;
+  --accent: 42 70% 85%;
+  --accent-foreground: 145 30% 18%;
+  --border: 145 18% 88%;
+  --input: 145 18% 88%;
+  --ring: 145 45% 38%;
+  --rose: 145 45% 38%;
+  --rose-deep: 145 40% 30%;
+  --rose-light: 145 35% 88%;
+  --blush: 42 50% 96%;
+  --lavender: 42 55% 82%;
+  --lavender-deep: 42 60% 50%;
+  --cream: 42 40% 96%;
+  --champagne: 42 35% 90%;
+  --charcoal: 145 20% 14%;
+  --taupe: 145 12% 42%;
+
+  --section-alt-bg: 42 35% 96%;
+  --section-products-bg: 140 15% 98%;
+  --products-page-hero-gradient: linear-gradient(155deg, hsl(145 40% 95%) 0%, hsl(42 50% 94%) 50%, hsl(140 20% 96%) 100%);
+  --products-page-stats-bg: 42 35% 97%;
+  --orb-color-1: 42 50% 82%;
+  --orb-color-2: 145 40% 78%;
+  --hero-orb-1: 145 45% 38%;
+  --hero-orb-2: 42 60% 50%;
+  --hero-orb-3: 145 35% 65%;
+
+  --btn-primary-gradient: linear-gradient(135deg, hsl(145 45% 38%), hsl(42 60% 48%));
+  --btn-primary-shadow: 0 8px 32px -4px hsl(145 45% 38% / 0.5);
+  --btn-cta-gradient: linear-gradient(135deg, hsl(145 42% 35%), hsl(42 55% 45%));
+  --btn-cta-shadow: 0 8px 32px -4px hsl(145 45% 38% / 0.55), 0 2px 8px -2px hsl(42 60% 50% / 0.3);
+  --btn-product-gradient: linear-gradient(135deg, hsl(145 45% 38%), hsl(145 40% 30%));
+  --btn-product-shadow: 0 3px 12px -2px hsl(145 45% 38% / 0.45);
+
+  --feature-icon-bg: linear-gradient(135deg, hsl(145 45% 38% / 0.12), hsl(42 55% 82% / 0.3));
+  --feature-icon-color: 145 45% 38%;
+  --feature-card-glow: radial-gradient(circle at 50% 0%, hsl(145 45% 38% / 0.05), transparent 70%);
+
+  --price-gradient: linear-gradient(135deg, hsl(145 45% 35%), hsl(145 40% 28%));
+  --cta-banner-gradient: linear-gradient(155deg, hsl(145 45% 38% / 0.08) 0%, hsl(42 55% 82% / 0.12) 50%, hsl(42 35% 96%) 100%);
+  --text-gradient: linear-gradient(135deg, hsl(145 45% 38%), hsl(42 60% 50%));
+
+  --selection-bg: 145 45% 38%;
+  --selection-text: 145 40% 18%;
+  --scrollbar-thumb: 145 25% 78%;
+  --scrollbar-thumb-hover: 145 35% 55%;
+  --section-line-color: 145 25% 82%;
+
+  --navbar-light-bg: rgba(248, 252, 246, 0.85);
+  --navbar-light-border: hsl(145 35% 85% / 0.4);
+  --navbar-light-shadow: 0 1px 20px -4px hsl(145 45% 38% / 0.08);
+
+  --gradient-hero: linear-gradient(155deg, hsl(145 50% 35% / 0.9) 0%, hsl(42 70% 45% / 0.8) 50%, hsl(145 45% 30% / 0.85) 100%);
+  --gradient-footer: linear-gradient(135deg, hsl(145 30% 12%), hsl(42 30% 15%));
+  --shadow-soft: 0 2px 16px -4px hsl(145 45% 38% / 0.12);
+  --shadow-card: 0 6px 28px -8px hsl(145 45% 38% / 0.16);
+  --shadow-hover: 0 16px 44px -8px hsl(145 45% 38% / 0.30);
+  --shadow-button: 0 4px 20px -4px hsl(145 45% 38% / 0.50);
+  --shadow-subtle: 0 1px 8px -2px hsl(145 20% 16% / 0.07);
+}
+
+/* ── Kemerdekaan: Merah, Putih ── */
+.theme-kemerdekaan {
+  --background: 0 10% 99%;
+  --foreground: 0 20% 14%;
+  --card: 0 5% 100%;
+  --card-foreground: 0 20% 14%;
+  --primary: 0 72% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 15% 94%;
+  --secondary-foreground: 0 40% 22%;
+  --muted: 0 10% 95%;
+  --muted-foreground: 0 15% 45%;
+  --accent: 0 0% 96%;
+  --accent-foreground: 0 60% 25%;
+  --border: 0 20% 90%;
+  --input: 0 20% 90%;
+  --ring: 0 72% 50%;
+  --rose: 0 72% 50%;
+  --rose-deep: 0 65% 40%;
+  --rose-light: 0 55% 90%;
+  --blush: 0 25% 97%;
+  --lavender: 0 40% 85%;
+  --lavender-deep: 0 55% 45%;
+  --cream: 0 12% 97%;
+  --champagne: 0 15% 93%;
+  --charcoal: 0 20% 14%;
+  --taupe: 0 15% 45%;
+
+  --section-alt-bg: 0 8% 96%;
+  --section-products-bg: 0 10% 99%;
+  --products-page-hero-gradient: linear-gradient(155deg, hsl(0 60% 96%) 0%, hsl(0 5% 97%) 50%, hsl(0 10% 97%) 100%);
+  --products-page-stats-bg: 0 8% 97%;
+  --orb-color-1: 0 40% 85%;
+  --orb-color-2: 0 55% 80%;
+  --hero-orb-1: 0 72% 50%;
+  --hero-orb-2: 0 0% 85%;
+  --hero-orb-3: 0 55% 70%;
+
+  --btn-primary-gradient: linear-gradient(135deg, hsl(0 72% 50%), hsl(0 60% 42%));
+  --btn-primary-shadow: 0 8px 32px -4px hsl(0 72% 50% / 0.5);
+  --btn-cta-gradient: linear-gradient(135deg, hsl(0 70% 48%), hsl(0 58% 40%));
+  --btn-cta-shadow: 0 8px 32px -4px hsl(0 72% 50% / 0.55), 0 2px 8px -2px hsl(0 60% 42% / 0.3);
+  --btn-product-gradient: linear-gradient(135deg, hsl(0 72% 50%), hsl(0 65% 40%));
+  --btn-product-shadow: 0 3px 12px -2px hsl(0 72% 50% / 0.45);
+
+  --feature-icon-bg: linear-gradient(135deg, hsl(0 72% 50% / 0.12), hsl(0 40% 85% / 0.3));
+  --feature-icon-color: 0 72% 50%;
+  --feature-card-glow: radial-gradient(circle at 50% 0%, hsl(0 72% 50% / 0.05), transparent 70%);
+
+  --price-gradient: linear-gradient(135deg, hsl(0 72% 48%), hsl(0 65% 38%));
+  --cta-banner-gradient: linear-gradient(155deg, hsl(0 72% 50% / 0.08) 0%, hsl(0 40% 85% / 0.12) 50%, hsl(0 12% 97%) 100%);
+  --text-gradient: linear-gradient(135deg, hsl(0 72% 50%), hsl(0 55% 45%));
+
+  --selection-bg: 0 72% 50%;
+  --selection-text: 0 60% 20%;
+  --scrollbar-thumb: 0 30% 80%;
+  --scrollbar-thumb-hover: 0 50% 60%;
+  --section-line-color: 0 25% 82%;
+
+  --navbar-light-bg: rgba(255, 250, 250, 0.85);
+  --navbar-light-border: hsl(0 55% 88% / 0.4);
+  --navbar-light-shadow: 0 1px 20px -4px hsl(0 72% 50% / 0.08);
+
+  --gradient-hero: linear-gradient(155deg, hsl(0 72% 40% / 0.9) 0%, hsl(0 0% 90% / 0.3) 50%, hsl(0 70% 35% / 0.85) 100%);
+  --gradient-footer: linear-gradient(135deg, hsl(0 50% 12%), hsl(0 10% 10%));
+  --shadow-soft: 0 2px 16px -4px hsl(0 72% 50% / 0.12);
+  --shadow-card: 0 6px 28px -8px hsl(0 72% 50% / 0.16);
+  --shadow-hover: 0 16px 44px -8px hsl(0 72% 50% / 0.30);
+  --shadow-button: 0 4px 20px -4px hsl(0 72% 50% / 0.50);
+  --shadow-subtle: 0 1px 8px -2px hsl(0 20% 16% / 0.07);
+}
+
+/* ── Valentine: Merah Muda, Pink, Putih ── */
+.theme-valentine {
+  --background: 340 20% 99%;
+  --foreground: 340 18% 15%;
+  --card: 340 15% 100%;
+  --card-foreground: 340 18% 15%;
+  --primary: 340 75% 55%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 330 40% 93%;
+  --secondary-foreground: 340 50% 25%;
+  --muted: 330 25% 95%;
+  --muted-foreground: 340 15% 45%;
+  --accent: 330 60% 90%;
+  --accent-foreground: 340 50% 25%;
+  --border: 340 25% 90%;
+  --input: 340 25% 90%;
+  --ring: 340 75% 55%;
+  --rose: 340 75% 55%;
+  --rose-deep: 340 65% 45%;
+  --rose-light: 340 55% 90%;
+  --blush: 330 45% 96%;
+  --lavender: 330 50% 85%;
+  --lavender-deep: 340 60% 48%;
+  --cream: 330 30% 97%;
+  --champagne: 330 28% 92%;
+  --charcoal: 340 18% 15%;
+  --taupe: 340 15% 45%;
+
+  --section-alt-bg: 330 25% 96%;
+  --section-products-bg: 340 20% 99%;
+  --products-page-hero-gradient: linear-gradient(155deg, hsl(340 65% 96%) 0%, hsl(330 50% 95%) 50%, hsl(330 30% 97%) 100%);
+  --products-page-stats-bg: 330 25% 97%;
+  --orb-color-1: 330 50% 85%;
+  --orb-color-2: 340 60% 80%;
+  --hero-orb-1: 340 75% 55%;
+  --hero-orb-2: 330 55% 50%;
+  --hero-orb-3: 350 60% 75%;
+
+  --btn-primary-gradient: linear-gradient(135deg, hsl(340 75% 55%), hsl(330 60% 48%));
+  --btn-primary-shadow: 0 8px 32px -4px hsl(340 75% 55% / 0.5);
+  --btn-cta-gradient: linear-gradient(135deg, hsl(340 72% 52%), hsl(330 58% 46%));
+  --btn-cta-shadow: 0 8px 32px -4px hsl(340 75% 55% / 0.55), 0 2px 8px -2px hsl(330 60% 48% / 0.3);
+  --btn-product-gradient: linear-gradient(135deg, hsl(340 75% 55%), hsl(340 65% 45%));
+  --btn-product-shadow: 0 3px 12px -2px hsl(340 75% 55% / 0.45);
+
+  --feature-icon-bg: linear-gradient(135deg, hsl(340 75% 55% / 0.12), hsl(330 50% 85% / 0.3));
+  --feature-icon-color: 340 75% 55%;
+  --feature-card-glow: radial-gradient(circle at 50% 0%, hsl(340 75% 55% / 0.05), transparent 70%);
+
+  --price-gradient: linear-gradient(135deg, hsl(340 70% 52%), hsl(340 60% 42%));
+  --cta-banner-gradient: linear-gradient(155deg, hsl(340 75% 55% / 0.08) 0%, hsl(330 50% 85% / 0.12) 50%, hsl(330 30% 97%) 100%);
+  --text-gradient: linear-gradient(135deg, hsl(340 75% 55%), hsl(330 60% 48%));
+
+  --selection-bg: 340 75% 55%;
+  --selection-text: 340 60% 22%;
+  --scrollbar-thumb: 340 35% 80%;
+  --scrollbar-thumb-hover: 340 55% 60%;
+  --section-line-color: 340 30% 82%;
+
+  --navbar-light-bg: rgba(255, 248, 252, 0.85);
+  --navbar-light-border: hsl(340 55% 88% / 0.4);
+  --navbar-light-shadow: 0 1px 20px -4px hsl(340 75% 55% / 0.08);
+
+  --gradient-hero: linear-gradient(155deg, hsl(340 75% 40% / 0.9) 0%, hsl(330 55% 50% / 0.8) 50%, hsl(350 65% 38% / 0.85) 100%);
+  --gradient-footer: linear-gradient(135deg, hsl(340 40% 12%), hsl(330 25% 15%));
+  --shadow-soft: 0 2px 16px -4px hsl(340 75% 55% / 0.12);
+  --shadow-card: 0 6px 28px -8px hsl(340 75% 55% / 0.16);
+  --shadow-hover: 0 16px 44px -8px hsl(340 75% 55% / 0.30);
+  --shadow-button: 0 4px 20px -4px hsl(340 75% 55% / 0.50);
+  --shadow-subtle: 0 1px 8px -2px hsl(340 18% 15% / 0.07);
+}
+
+/* ── Natal: Merah, Hijau, Emas ── */
+.theme-natal {
+  --background: 0 6% 98%;
+  --foreground: 0 15% 14%;
+  --card: 0 5% 100%;
+  --card-foreground: 0 15% 14%;
+  --primary: 0 65% 45%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 140 20% 93%;
+  --secondary-foreground: 140 25% 18%;
+  --muted: 42 18% 95%;
+  --muted-foreground: 0 10% 45%;
+  --accent: 140 50% 88%;
+  --accent-foreground: 140 35% 20%;
+  --border: 0 15% 90%;
+  --input: 0 15% 90%;
+  --ring: 0 65% 45%;
+  --rose: 0 65% 45%;
+  --rose-deep: 0 55% 35%;
+  --rose-light: 0 40% 90%;
+  --blush: 42 40% 96%;
+  --lavender: 140 35% 82%;
+  --lavender-deep: 140 40% 35%;
+  --cream: 42 35% 96%;
+  --champagne: 42 30% 92%;
+  --charcoal: 0 15% 14%;
+  --taupe: 0 10% 45%;
+
+  --section-alt-bg: 42 28% 96%;
+  --section-products-bg: 0 6% 98%;
+  --products-page-hero-gradient: linear-gradient(155deg, hsl(0 50% 96%) 0%, hsl(140 35% 95%) 50%, hsl(42 35% 96%) 100%);
+  --products-page-stats-bg: 42 28% 97%;
+  --orb-color-1: 140 35% 82%;
+  --orb-color-2: 0 50% 82%;
+  --hero-orb-1: 0 65% 45%;
+  --hero-orb-2: 140 40% 35%;
+  --hero-orb-3: 42 55% 60%;
+
+  --btn-primary-gradient: linear-gradient(135deg, hsl(0 65% 45%), hsl(140 40% 32%));
+  --btn-primary-shadow: 0 8px 32px -4px hsl(0 65% 45% / 0.5);
+  --btn-cta-gradient: linear-gradient(135deg, hsl(0 62% 42%), hsl(140 38% 30%));
+  --btn-cta-shadow: 0 8px 32px -4px hsl(0 65% 45% / 0.55), 0 2px 8px -2px hsl(140 40% 32% / 0.3);
+  --btn-product-gradient: linear-gradient(135deg, hsl(0 65% 45%), hsl(0 55% 35%));
+  --btn-product-shadow: 0 3px 12px -2px hsl(0 65% 45% / 0.45);
+
+  --feature-icon-bg: linear-gradient(135deg, hsl(0 65% 45% / 0.12), hsl(140 35% 82% / 0.3));
+  --feature-icon-color: 0 65% 45%;
+  --feature-card-glow: radial-gradient(circle at 50% 0%, hsl(0 65% 45% / 0.05), transparent 70%);
+
+  --price-gradient: linear-gradient(135deg, hsl(0 65% 42%), hsl(0 55% 32%));
+  --cta-banner-gradient: linear-gradient(155deg, hsl(0 65% 45% / 0.08) 0%, hsl(140 35% 82% / 0.12) 50%, hsl(42 35% 96%) 100%);
+  --text-gradient: linear-gradient(135deg, hsl(0 65% 45%), hsl(140 40% 35%));
+
+  --selection-bg: 0 65% 45%;
+  --selection-text: 0 50% 20%;
+  --scrollbar-thumb: 0 25% 80%;
+  --scrollbar-thumb-hover: 0 45% 58%;
+  --section-line-color: 0 20% 85%;
+
+  --navbar-light-bg: rgba(255, 250, 248, 0.85);
+  --navbar-light-border: hsl(0 40% 88% / 0.4);
+  --navbar-light-shadow: 0 1px 20px -4px hsl(0 65% 45% / 0.08);
+
+  --gradient-hero: linear-gradient(155deg, hsl(0 65% 35% / 0.9) 0%, hsl(140 45% 28% / 0.8) 50%, hsl(42 55% 35% / 0.75) 100%);
+  --gradient-footer: linear-gradient(135deg, hsl(0 40% 12%), hsl(140 25% 12%));
+  --shadow-soft: 0 2px 16px -4px hsl(0 65% 45% / 0.12);
+  --shadow-card: 0 6px 28px -8px hsl(0 65% 45% / 0.16);
+  --shadow-hover: 0 16px 44px -8px hsl(0 65% 45% / 0.30);
+  --shadow-button: 0 4px 20px -4px hsl(0 65% 45% / 0.50);
+  --shadow-subtle: 0 1px 8px -2px hsl(0 15% 14% / 0.07);
+}
+
+/* ── Semi (Spring): Pink Pastel, Hijau Muda, Kuning ── */
+.theme-semi {
+  --background: 45 30% 98%;
+  --foreground: 340 15% 18%;
+  --card: 0 0% 100%;
+  --card-foreground: 340 15% 18%;
+  --primary: 340 45% 72%;
+  --primary-foreground: 340 20% 15%;
+  --secondary: 140 30% 92%;
+  --secondary-foreground: 140 25% 20%;
+  --muted: 140 25% 95%;
+  --muted-foreground: 340 10% 45%;
+  --accent: 140 40% 88%;
+  --accent-foreground: 140 30% 22%;
+  --border: 340 20% 90%;
+  --input: 340 20% 90%;
+  --ring: 340 45% 72%;
+  --rose: 340 45% 72%;
+  --rose-deep: 340 40% 60%;
+  --rose-light: 340 40% 92%;
+  --blush: 50 45% 96%;
+  --lavender: 200 40% 85%;
+  --lavender-deep: 140 35% 50%;
+  --cream: 50 40% 97%;
+  --champagne: 50 32% 92%;
+  --charcoal: 340 15% 18%;
+  --taupe: 340 10% 45%;
+
+  --section-alt-bg: 50 30% 96%;
+  --section-products-bg: 45 30% 98%;
+  --products-page-hero-gradient: linear-gradient(155deg, hsl(340 40% 95%) 0%, hsl(140 35% 94%) 50%, hsl(50 40% 96%) 100%);
+  --products-page-stats-bg: 50 30% 97%;
+  --orb-color-1: 200 40% 85%;
+  --orb-color-2: 340 40% 82%;
+  --hero-orb-1: 340 45% 72%;
+  --hero-orb-2: 140 35% 50%;
+  --hero-orb-3: 50 50% 70%;
+
+  --btn-primary-gradient: linear-gradient(135deg, hsl(340 45% 72%), hsl(140 35% 50%));
+  --btn-primary-shadow: 0 8px 32px -4px hsl(340 45% 72% / 0.5);
+  --btn-cta-gradient: linear-gradient(135deg, hsl(340 42% 68%), hsl(140 32% 48%));
+  --btn-cta-shadow: 0 8px 32px -4px hsl(340 45% 72% / 0.55), 0 2px 8px -2px hsl(140 35% 50% / 0.3);
+  --btn-product-gradient: linear-gradient(135deg, hsl(340 45% 72%), hsl(340 40% 60%));
+  --btn-product-shadow: 0 3px 12px -2px hsl(340 45% 72% / 0.45);
+
+  --feature-icon-bg: linear-gradient(135deg, hsl(340 45% 72% / 0.12), hsl(140 40% 85% / 0.3));
+  --feature-icon-color: 340 45% 72%;
+  --feature-card-glow: radial-gradient(circle at 50% 0%, hsl(340 45% 72% / 0.05), transparent 70%);
+
+  --price-gradient: linear-gradient(135deg, hsl(340 42% 65%), hsl(340 38% 55%));
+  --cta-banner-gradient: linear-gradient(155deg, hsl(340 45% 72% / 0.08) 0%, hsl(140 40% 85% / 0.12) 50%, hsl(50 40% 97%) 100%);
+  --text-gradient: linear-gradient(135deg, hsl(340 45% 72%), hsl(140 35% 50%));
+
+  --selection-bg: 340 45% 72%;
+  --selection-text: 340 35% 22%;
+  --scrollbar-thumb: 340 25% 82%;
+  --scrollbar-thumb-hover: 340 38% 60%;
+  --section-line-color: 340 22% 85%;
+
+  --navbar-light-bg: rgba(255, 254, 248, 0.85);
+  --navbar-light-border: hsl(340 38% 88% / 0.4);
+  --navbar-light-shadow: 0 1px 20px -4px hsl(340 45% 72% / 0.08);
+
+  --gradient-hero: linear-gradient(155deg, hsl(340 45% 65% / 0.8) 0%, hsl(140 35% 55% / 0.7) 50%, hsl(50 55% 60% / 0.72) 100%);
+  --gradient-footer: linear-gradient(135deg, hsl(340 20% 14%), hsl(140 18% 14%));
+  --shadow-soft: 0 2px 16px -4px hsl(340 45% 72% / 0.12);
+  --shadow-card: 0 6px 28px -8px hsl(340 45% 72% / 0.16);
+  --shadow-hover: 0 16px 44px -8px hsl(340 45% 72% / 0.30);
+  --shadow-button: 0 4px 20px -4px hsl(340 45% 72% / 0.50);
+  --shadow-subtle: 0 1px 8px -2px hsl(340 15% 18% / 0.07);
+}
+
+/* ── Panas (Summer): Biru Laut, Kuning, Oranye ── */
+.theme-panas {
+  --background: 45 25% 98%;
+  --foreground: 200 20% 15%;
+  --card: 0 0% 100%;
+  --card-foreground: 200 20% 15%;
+  --primary: 200 70% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 45 45% 92%;
+  --secondary-foreground: 25 40% 20%;
+  --muted: 45 30% 95%;
+  --muted-foreground: 200 12% 45%;
+  --accent: 45 80% 85%;
+  --accent-foreground: 25 50% 22%;
+  --border: 200 25% 90%;
+  --input: 200 25% 90%;
+  --ring: 200 70% 50%;
+  --rose: 200 70% 50%;
+  --rose-deep: 200 60% 40%;
+  --rose-light: 200 50% 90%;
+  --blush: 45 50% 96%;
+  --lavender: 45 60% 82%;
+  --lavender-deep: 25 65% 50%;
+  --cream: 45 40% 97%;
+  --champagne: 45 35% 92%;
+  --charcoal: 200 20% 15%;
+  --taupe: 200 12% 45%;
+
+  --section-alt-bg: 45 28% 96%;
+  --section-products-bg: 45 25% 98%;
+  --products-page-hero-gradient: linear-gradient(155deg, hsl(200 55% 95%) 0%, hsl(45 60% 94%) 50%, hsl(25 45% 96%) 100%);
+  --products-page-stats-bg: 45 28% 97%;
+  --orb-color-1: 45 60% 82%;
+  --orb-color-2: 200 50% 80%;
+  --hero-orb-1: 200 70% 50%;
+  --hero-orb-2: 45 70% 55%;
+  --hero-orb-3: 25 65% 65%;
+
+  --btn-primary-gradient: linear-gradient(135deg, hsl(200 70% 50%), hsl(25 70% 48%));
+  --btn-primary-shadow: 0 8px 32px -4px hsl(200 70% 50% / 0.5);
+  --btn-cta-gradient: linear-gradient(135deg, hsl(200 65% 48%), hsl(25 65% 45%));
+  --btn-cta-shadow: 0 8px 32px -4px hsl(200 70% 50% / 0.55), 0 2px 8px -2px hsl(25 65% 48% / 0.3);
+  --btn-product-gradient: linear-gradient(135deg, hsl(200 70% 50%), hsl(200 60% 40%));
+  --btn-product-shadow: 0 3px 12px -2px hsl(200 70% 50% / 0.45);
+
+  --feature-icon-bg: linear-gradient(135deg, hsl(200 70% 50% / 0.12), hsl(45 60% 82% / 0.3));
+  --feature-icon-color: 200 70% 50%;
+  --feature-card-glow: radial-gradient(circle at 50% 0%, hsl(200 70% 50% / 0.05), transparent 70%);
+
+  --price-gradient: linear-gradient(135deg, hsl(200 65% 45%), hsl(200 55% 38%));
+  --cta-banner-gradient: linear-gradient(155deg, hsl(200 70% 50% / 0.08) 0%, hsl(45 60% 82% / 0.12) 50%, hsl(45 40% 97%) 100%);
+  --text-gradient: linear-gradient(135deg, hsl(200 70% 50%), hsl(25 65% 50%));
+
+  --selection-bg: 200 70% 50%;
+  --selection-text: 200 55% 20%;
+  --scrollbar-thumb: 200 30% 78%;
+  --scrollbar-thumb-hover: 200 50% 55%;
+  --section-line-color: 200 22% 82%;
+
+  --navbar-light-bg: rgba(250, 252, 255, 0.85);
+  --navbar-light-border: hsl(200 45% 88% / 0.4);
+  --navbar-light-shadow: 0 1px 20px -4px hsl(200 70% 50% / 0.08);
+
+  --gradient-hero: linear-gradient(155deg, hsl(200 70% 38% / 0.82) 0%, hsl(45 75% 48% / 0.72) 50%, hsl(25 70% 42% / 0.78) 100%);
+  --gradient-footer: linear-gradient(135deg, hsl(200 40% 12%), hsl(25 30% 14%));
+  --shadow-soft: 0 2px 16px -4px hsl(200 70% 50% / 0.12);
+  --shadow-card: 0 6px 28px -8px hsl(200 70% 50% / 0.16);
+  --shadow-hover: 0 16px 44px -8px hsl(200 70% 50% / 0.30);
+  --shadow-button: 0 4px 20px -4px hsl(200 70% 50% / 0.50);
+  --shadow-subtle: 0 1px 8px -2px hsl(200 20% 15% / 0.07);
+}
+
+/* ── Gugur (Autumn/Fall): Coklat, Oranye, Merah Tua ── */
+.theme-gugur {
+  --background: 35 20% 97%;
+  --foreground: 20 18% 16%;
+  --card: 35 15% 99%;
+  --card-foreground: 20 18% 16%;
+  --primary: 25 55% 45%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 40 30% 92%;
+  --secondary-foreground: 15 35% 20%;
+  --muted: 35 20% 94%;
+  --muted-foreground: 20 12% 45%;
+  --accent: 40 50% 85%;
+  --accent-foreground: 15 40% 20%;
+  --border: 25 20% 88%;
+  --input: 25 20% 88%;
+  --ring: 25 55% 45%;
+  --rose: 25 55% 45%;
+  --rose-deep: 15 50% 35%;
+  --rose-light: 25 40% 90%;
+  --blush: 35 35% 96%;
+  --lavender: 40 40% 80%;
+  --lavender-deep: 15 45% 40%;
+  --cream: 35 30% 96%;
+  --champagne: 35 25% 91%;
+  --charcoal: 20 18% 16%;
+  --taupe: 20 12% 45%;
+
+  --section-alt-bg: 35 22% 95%;
+  --section-products-bg: 35 20% 97%;
+  --products-page-hero-gradient: linear-gradient(155deg, hsl(25 45% 95%) 0%, hsl(40 40% 94%) 50%, hsl(15 30% 96%) 100%);
+  --products-page-stats-bg: 35 22% 96%;
+  --orb-color-1: 40 40% 80%;
+  --orb-color-2: 25 45% 78%;
+  --hero-orb-1: 25 55% 45%;
+  --hero-orb-2: 15 45% 40%;
+  --hero-orb-3: 40 45% 60%;
+
+  --btn-primary-gradient: linear-gradient(135deg, hsl(25 55% 45%), hsl(15 45% 38%));
+  --btn-primary-shadow: 0 8px 32px -4px hsl(25 55% 45% / 0.5);
+  --btn-cta-gradient: linear-gradient(135deg, hsl(25 52% 42%), hsl(15 42% 35%));
+  --btn-cta-shadow: 0 8px 32px -4px hsl(25 55% 45% / 0.55), 0 2px 8px -2px hsl(15 45% 38% / 0.3);
+  --btn-product-gradient: linear-gradient(135deg, hsl(25 55% 45%), hsl(25 50% 35%));
+  --btn-product-shadow: 0 3px 12px -2px hsl(25 55% 45% / 0.45);
+
+  --feature-icon-bg: linear-gradient(135deg, hsl(25 55% 45% / 0.12), hsl(40 40% 80% / 0.3));
+  --feature-icon-color: 25 55% 45%;
+  --feature-card-glow: radial-gradient(circle at 50% 0%, hsl(25 55% 45% / 0.05), transparent 70%);
+
+  --price-gradient: linear-gradient(135deg, hsl(25 52% 42%), hsl(25 48% 32%));
+  --cta-banner-gradient: linear-gradient(155deg, hsl(25 55% 45% / 0.08) 0%, hsl(40 40% 80% / 0.12) 50%, hsl(35 30% 96%) 100%);
+  --text-gradient: linear-gradient(135deg, hsl(25 55% 45%), hsl(15 45% 40%));
+
+  --selection-bg: 25 55% 45%;
+  --selection-text: 25 45% 20%;
+  --scrollbar-thumb: 25 25% 78%;
+  --scrollbar-thumb-hover: 25 42% 55%;
+  --section-line-color: 25 20% 82%;
+
+  --navbar-light-bg: rgba(252, 250, 246, 0.85);
+  --navbar-light-border: hsl(25 35% 88% / 0.4);
+  --navbar-light-shadow: 0 1px 20px -4px hsl(25 55% 45% / 0.08);
+
+  --gradient-hero: linear-gradient(155deg, hsl(25 55% 32% / 0.85) 0%, hsl(15 50% 38% / 0.78) 50%, hsl(40 45% 30% / 0.82) 100%);
+  --gradient-footer: linear-gradient(135deg, hsl(20 30% 10%), hsl(35 20% 12%));
+  --shadow-soft: 0 2px 16px -4px hsl(25 55% 45% / 0.12);
+  --shadow-card: 0 6px 28px -8px hsl(25 55% 45% / 0.16);
+  --shadow-hover: 0 16px 44px -8px hsl(25 55% 45% / 0.30);
+  --shadow-button: 0 4px 20px -4px hsl(25 55% 45% / 0.50);
+  --shadow-subtle: 0 1px 8px -2px hsl(20 18% 16% / 0.07);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   SEASONAL PARTICLE ANIMATION
+   ══════════════════════════════════════════════════════════ */
+@keyframes seasonalFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.seasonal-particle {
+  position: absolute;
+  top: -20px;
+  animation: seasonalFall linear infinite;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ══════════════════════════════════════════════════════════
+   BASE STYLES
+   ══════════════════════════════════════════════════════════ */
+
 @layer base {
   * { @apply border-border; }
   html { scroll-behavior: smooth; }
 
-  /* Custom text selection color */
   ::selection {
-    background: hsl(345 55% 68% / 0.25);
-    color: hsl(345 50% 32%);
+    background: hsl(var(--selection-bg) / 0.25);
+    color: hsl(var(--selection-text));
   }
   ::-moz-selection {
-    background: hsl(345 55% 68% / 0.25);
-    color: hsl(345 50% 32%);
+    background: hsl(var(--selection-bg) / 0.25);
+    color: hsl(var(--selection-text));
   }
 
   body {
@@ -107,10 +697,10 @@
     border-bottom: 1px solid rgba(255,255,255,0.07);
   }
   .navbar-light {
-    background: rgba(255, 252, 250, 0.82);
+    background: var(--navbar-light-bg);
     @apply backdrop-blur-2xl;
-    border-bottom: 1px solid hsl(345 55% 88% / 0.35);
-    box-shadow: 0 1px 20px -4px hsl(345 55% 68% / 0.08);
+    border-bottom: 1px solid var(--navbar-light-border);
+    box-shadow: var(--navbar-light-shadow);
   }
   .product-card {
     @apply transition-all duration-300 ease-out will-change-transform;
@@ -127,7 +717,7 @@
   }
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--rose)), hsl(var(--lavender-deep)));
+    background-image: var(--text-gradient);
   }
   .nav-link {
     @apply relative;
@@ -139,7 +729,7 @@
   .nav-link::after {
     content: "";
     @apply absolute -bottom-0.5 left-0 w-0 h-px rounded-full transition-all duration-300;
-    background: linear-gradient(90deg, hsl(var(--rose)), hsl(var(--lavender-deep)));
+    background: var(--text-gradient);
   }
   .nav-link:hover::after { @apply w-full; }
 
@@ -187,7 +777,6 @@
   }
   .fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
 
-  /* Shimmer on product cards */
   @keyframes shimmerMove {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
@@ -220,7 +809,7 @@
   .text-balance { text-wrap: balance; }
 }
 
-/* ── Slim Scrollbar — global (Webkit/Blink) ── */
+/* ── Slim Scrollbar ── */
 ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
@@ -229,32 +818,30 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(345 30% 80% / 0.55);
+  background: hsl(var(--scrollbar-thumb) / 0.55);
   border-radius: 999px;
   transition: background 0.2s;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(345 45% 65% / 0.75);
+  background: hsl(var(--scrollbar-thumb-hover) / 0.75);
 }
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
 
-/* Firefox slim scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: hsl(345 30% 80% / 0.55) transparent;
+  scrollbar-color: hsl(var(--scrollbar-thumb) / 0.55) transparent;
 }
 
-/* Modal inner scroll — sedikit lebih tebal agar mudah drag */
 .modal-scroll::-webkit-scrollbar {
   width: 3px;
 }
 .modal-scroll::-webkit-scrollbar-thumb {
-  background: hsl(345 35% 78% / 0.5);
+  background: hsl(var(--scrollbar-thumb) / 0.5);
   border-radius: 999px;
 }
 .modal-scroll {
   scrollbar-width: thin;
-  scrollbar-color: hsl(345 35% 78% / 0.5) transparent;
+  scrollbar-color: hsl(var(--scrollbar-thumb) / 0.5) transparent;
 }

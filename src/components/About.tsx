@@ -22,11 +22,11 @@ const About = () => {
   ];
 
   return (
-    <section id="tentang" className="py-20 md:py-28 relative overflow-hidden" style={{ background: "hsl(38 42% 97%)" }}>
+    <section id="tentang" className="py-20 md:py-28 relative overflow-hidden" style={{ background: "hsl(var(--section-alt-bg))" }}>
       {/* Decorative background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, hsl(345 30% 80% / 0.4), transparent)" }} />
-        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, hsl(345 30% 80% / 0.4), transparent)" }} />
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, hsl(var(--section-line-color) / 0.4), transparent)" }} />
+        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, hsl(var(--section-line-color) / 0.4), transparent)" }} />
       </div>
 
       <div className="container mx-auto px-6">
@@ -64,16 +64,16 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.12 }}
-              className="group bg-white rounded-2xl p-7 border border-transparent hover:border-primary/15 transition-all duration-300 relative overflow-hidden"
+              className="group bg-card rounded-2xl p-7 border border-transparent hover:border-primary/15 transition-all duration-300 relative overflow-hidden"
               style={{ boxShadow: "var(--shadow-subtle)" }}
             >
               {/* Card glow on hover */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
-                style={{ background: "radial-gradient(circle at 50% 0%, hsl(345 55% 68% / 0.05), transparent 70%)" }} />
+                style={{ background: "var(--feature-card-glow)" }} />
 
               <div
                 className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300"
-                style={{ background: "linear-gradient(135deg, hsl(345 55% 68% / 0.12), hsl(275 35% 87% / 0.3))" }}
+                style={{ background: "var(--feature-icon-bg)" }}
               >
                 <feature.icon className="w-5 h-5" style={{ color: "hsl(var(--rose))" }} />
               </div>

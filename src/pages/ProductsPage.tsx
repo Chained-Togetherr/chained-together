@@ -59,8 +59,7 @@ const ProductsPage = () => {
         <div
           className="absolute inset-0 -z-0"
           style={{
-            background:
-              "linear-gradient(155deg, hsl(345 55% 97%) 0%, hsl(275 35% 96%) 50%, hsl(38 42% 97%) 100%)",
+            background: "var(--products-page-hero-gradient)",
           }}
         />
         {/* Decorative orbs */}
@@ -69,13 +68,13 @@ const ProductsPage = () => {
             animate={{ y: [-10, 10, -10], x: [-5, 5, -5] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             className="absolute top-10 right-[5%] w-72 h-72 rounded-full opacity-40 blur-3xl"
-            style={{ background: "radial-gradient(circle, hsl(275 35% 85%), transparent)" }}
+            style={{ background: "radial-gradient(circle, hsl(var(--orb-color-1)), transparent)" }}
           />
           <motion.div
             animate={{ y: [8, -8, 8] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             className="absolute bottom-0 left-[-5%] w-80 h-80 rounded-full opacity-35 blur-3xl"
-            style={{ background: "radial-gradient(circle, hsl(345 55% 82%), transparent)" }}
+            style={{ background: "radial-gradient(circle, hsl(var(--orb-color-2)), transparent)" }}
           />
         </div>
 
@@ -139,12 +138,12 @@ const ProductsPage = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setIsSearchFocused(false)}
-                className="w-full pl-11 pr-4 py-3 rounded-full bg-white border text-sm outline-none transition-all duration-300"
+                className="w-full pl-11 pr-4 py-3 rounded-full bg-card border text-sm outline-none transition-all duration-300"
                 style={{
                   fontFamily: "DM Sans, sans-serif",
                   borderColor: isSearchFocused ? "hsl(var(--rose))" : "hsl(var(--border))",
                   boxShadow: isSearchFocused
-                    ? "0 0 0 3px hsl(345 55% 68% / 0.12)"
+                    ? "0 0 0 3px hsl(var(--rose) / 0.12)"
                     : "var(--shadow-subtle)",
                 }}
               />
@@ -156,7 +155,7 @@ const ProductsPage = () => {
       {/* Stats bar */}
       <div
         className="border-y border-border/60 py-3"
-        style={{ background: "hsl(38 42% 98%)" }}
+        style={{ background: "hsl(var(--products-page-stats-bg))" }}
       >
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between">
@@ -212,7 +211,7 @@ const ProductsPage = () => {
               >
                 <div
                   className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
-                  style={{ background: "hsl(345 55% 68% / 0.08)" }}
+                  style={{ background: "hsl(var(--rose) / 0.08)" }}
                 >
                   <Search className="w-7 h-7" style={{ color: "hsl(var(--rose))" }} />
                 </div>
@@ -241,18 +240,18 @@ const ProductsPage = () => {
             transition={{ duration: 0.6 }}
             className="max-w-2xl mx-auto text-center rounded-3xl p-10 md:p-14 relative overflow-hidden"
             style={{
-              background: "linear-gradient(135deg, hsl(345 55% 96%), hsl(275 35% 95%), hsl(38 42% 97%))",
-              border: "1px solid hsl(345 55% 88% / 0.5)",
+              background: "var(--cta-banner-gradient)",
+              border: "1px solid hsl(var(--rose) / 0.2)",
             }}
           >
             {/* Decorative bg circles */}
             <div
               className="absolute top-0 right-0 w-48 h-48 rounded-full opacity-30 blur-2xl pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(275 35% 78%), transparent)", transform: "translate(30%, -30%)" }}
+              style={{ background: "radial-gradient(circle, hsl(var(--orb-color-1)), transparent)", transform: "translate(30%, -30%)" }}
             />
             <div
               className="absolute bottom-0 left-0 w-40 h-40 rounded-full opacity-25 blur-2xl pointer-events-none"
-              style={{ background: "radial-gradient(circle, hsl(345 55% 80%), transparent)", transform: "translate(-30%, 30%)" }}
+              style={{ background: "radial-gradient(circle, hsl(var(--orb-color-2)), transparent)", transform: "translate(-30%, 30%)" }}
             />
 
             <div className="relative z-10">
@@ -273,10 +272,10 @@ const ProductsPage = () => {
                 onClick={() => { navigate("/"); setTimeout(() => document.querySelector("#kontak")?.scrollIntoView({ behavior: "smooth" }), 300); }}
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-medium text-white transition-all duration-300"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-medium text-primary-foreground transition-all duration-300"
                 style={{
-                  background: "linear-gradient(135deg, hsl(345 55% 64%), hsl(275 35% 58%))",
-                  boxShadow: "0 6px 24px -4px hsl(345 55% 68% / 0.45)",
+                  background: "var(--btn-cta-gradient)",
+                  boxShadow: "var(--btn-cta-shadow)",
                   fontFamily: "DM Sans, sans-serif",
                   letterSpacing: "0.04em",
                 }}
@@ -301,10 +300,10 @@ const ProductsPage = () => {
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsCartOpen(true)}
-            className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-5 py-3.5 rounded-full text-white text-sm font-medium shadow-2xl"
+            className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-5 py-3.5 rounded-full text-primary-foreground text-sm font-medium shadow-2xl"
             style={{
-              background: "linear-gradient(135deg, hsl(345 55% 64%), hsl(275 35% 58%))",
-              boxShadow: "0 8px 32px -4px hsl(345 55% 68% / 0.55)",
+              background: "var(--btn-cta-gradient)",
+              boxShadow: "var(--btn-cta-shadow)",
               fontFamily: "DM Sans, sans-serif",
             }}
           >

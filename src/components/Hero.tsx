@@ -2,8 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, Sparkles } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import { getThemeData } from "@/config/theme";
 
 const Hero = () => {
+  const themeData = getThemeData();
   const scrollToProducts = () => {
     const element = document.querySelector("#produk");
     if (element) element.scrollIntoView({ behavior: "smooth" });
@@ -18,7 +20,7 @@ const Hero = () => {
       >
         {/* Multi-layer gradient overlay for depth */}
         <div className="absolute inset-0" style={{
-          background: "linear-gradient(155deg, hsl(345 55% 30% / 0.82) 0%, hsl(275 40% 28% / 0.78) 45%, hsl(345 50% 24% / 0.88) 100%)"
+          background: themeData.heroOverlayGradient
         }} />
         <div className="absolute inset-0" style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 40%, transparent 40%, hsl(340 14% 8% / 0.35) 100%)"
@@ -30,19 +32,19 @@ const Hero = () => {
         animate={{ y: [-12, 12, -12], x: [-4, 4, -4] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-1/4 left-[12%] w-48 h-48 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, hsl(345 55% 68% / 0.18), transparent 70%)", filter: "blur(20px)" }}
+        style={{ background: "radial-gradient(circle, hsl(var(--hero-orb-1) / 0.18), transparent 70%)", filter: "blur(20px)" }}
       />
       <motion.div
         animate={{ y: [10, -10, 10], x: [6, -6, 6] }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-1/3 right-[10%] w-64 h-64 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, hsl(275 40% 60% / 0.14), transparent 70%)", filter: "blur(24px)" }}
+        style={{ background: "radial-gradient(circle, hsl(var(--hero-orb-2) / 0.14), transparent 70%)", filter: "blur(24px)" }}
       />
       <motion.div
         animate={{ y: [-8, 8, -8] }}
         transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-[60%] left-[60%] w-32 h-32 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, hsl(345 60% 80% / 0.12), transparent 70%)", filter: "blur(16px)" }}
+        style={{ background: "radial-gradient(circle, hsl(var(--hero-orb-3) / 0.12), transparent 70%)", filter: "blur(16px)" }}
       />
 
       {/* Fine grain texture */}
@@ -118,9 +120,9 @@ const Hero = () => {
               whileTap={{ scale: 0.97 }}
               className="group inline-flex items-center justify-center gap-3 rounded-full font-medium tracking-wide transition-all duration-300 w-full sm:w-auto"
               style={{
-                background: "linear-gradient(135deg, hsl(345 55% 68%), hsl(275 35% 60%))",
+                background: "var(--btn-primary-gradient)",
                 color: "white",
-                boxShadow: "0 8px 32px -4px hsl(345 55% 68% / 0.5)",
+                boxShadow: "var(--btn-primary-shadow)",
                 fontFamily: "DM Sans, sans-serif",
                 letterSpacing: "0.04em",
                 fontSize: "0.85rem",

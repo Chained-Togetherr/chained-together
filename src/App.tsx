@@ -5,11 +5,35 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import { ToastProvider } from "@/contexts/ToastContext";
+import { getActiveTheme, getThemeData } from "@/config/theme";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import ProductsPage from "./pages/ProductsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+
+const ThemeApplicator = ({ children }: { children: React.ReactNode }) => {
+  const theme = getActiveTheme();
+  const data = getThemeData();
+
+  useEffect(() => {
+    document.documentElement.classList.remove(
+      "theme-lebaran",
+      "theme-kemerdekaan",
+      "theme-valentine",
+      "theme-natal",
+      "theme-semi",
+      "theme-panas",
+      "theme-gugur"
+    );
+    if (data.cssClass) {
+      document.documentElement.classList.add(data.cssClass);
+    }
+  }, [theme, data.cssClass]);
+
+  return <>{children}</>;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -17,15 +41,15 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        {/* CartProvider & ToastProvider lifted here so cart persists across page navigation */}
         <CartProvider>
           <ToastProvider>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/produk" element={<ProductsPage />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <ThemeApplicator>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/produk" element={<ProductsPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </ThemeApplicator>
           </ToastProvider>
         </CartProvider>
       </BrowserRouter>

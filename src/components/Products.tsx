@@ -13,11 +13,11 @@ const Products = () => {
       <div className="absolute inset-0 pointer-events-none -z-0">
         <div
           className="absolute top-10 right-[-8%] w-[500px] h-[500px] rounded-full opacity-25 blur-3xl"
-          style={{ background: "radial-gradient(circle, hsl(275 35% 85%), transparent)" }}
+          style={{ background: "radial-gradient(circle, hsl(var(--orb-color-1)), transparent)" }}
         />
         <div
           className="absolute bottom-10 left-[-6%] w-[400px] h-[400px] rounded-full opacity-20 blur-3xl"
-          style={{ background: "radial-gradient(circle, hsl(345 55% 80%), transparent)" }}
+          style={{ background: "radial-gradient(circle, hsl(var(--orb-color-2)), transparent)" }}
         />
       </div>
 
@@ -61,7 +61,7 @@ const Products = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.12 }}
-                className="relative group rounded-2xl overflow-hidden bg-white border border-border/50"
+                className="relative group rounded-2xl overflow-hidden bg-card border border-border/50"
                 style={{ boxShadow: "var(--shadow-subtle)" }}
               >
                 {/* Image */}
@@ -94,7 +94,7 @@ const Products = () => {
                       <span
                         className="text-xs md:text-sm font-semibold"
                         style={{
-                          background: "linear-gradient(135deg, hsl(0 75% 50%), hsl(15 85% 45%))",
+                          background: "var(--price-gradient-discount)",
                           WebkitBackgroundClip: "text",
                           WebkitTextFillColor: "transparent",
                           fontFamily: "DM Sans, sans-serif",
@@ -107,7 +107,7 @@ const Products = () => {
                     <span
                       className="text-xs md:text-sm font-semibold"
                       style={{
-                        background: "linear-gradient(135deg, hsl(345 55% 60%), hsl(345 50% 52%))",
+                        background: "var(--price-gradient)",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                         fontFamily: "DM Sans, sans-serif",
@@ -126,7 +126,7 @@ const Products = () => {
                   <span
                     className="text-xs font-medium px-3 py-1.5 rounded-full text-white"
                     style={{
-                      background: "linear-gradient(135deg, hsl(345 55% 68%), hsl(345 50% 56%))",
+                      background: "var(--btn-product-gradient)",
                       fontFamily: "DM Sans, sans-serif",
                     }}
                   >
@@ -150,10 +150,10 @@ const Products = () => {
             onClick={() => navigate("/produk")}
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            className="group inline-flex items-center gap-3 px-10 py-4 rounded-full font-medium text-sm text-white transition-all duration-300 relative overflow-hidden"
+            className="group inline-flex items-center gap-3 px-10 py-4 rounded-full font-medium text-sm text-primary-foreground transition-all duration-300 relative overflow-hidden"
             style={{
-              background: "linear-gradient(135deg, hsl(345 55% 64%), hsl(275 35% 58%))",
-              boxShadow: "0 8px 32px -4px hsl(345 55% 68% / 0.55), 0 2px 8px -2px hsl(275 35% 60% / 0.3)",
+              background: "var(--btn-cta-gradient)",
+              boxShadow: "var(--btn-cta-shadow)",
               fontFamily: "DM Sans, sans-serif",
               letterSpacing: "0.04em",
               fontSize: "0.85rem",

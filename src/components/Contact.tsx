@@ -7,7 +7,7 @@ const Contact = () => {
   const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}`;
 
   return (
-    <section id="kontak" className="py-20 md:py-28" style={{ background: "hsl(38 42% 97%)" }}>
+    <section id="kontak" className="py-20 md:py-28" style={{ background: "hsl(var(--section-alt-bg))" }}>
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -42,7 +42,7 @@ const Contact = () => {
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 p-5 bg-white rounded-2xl border border-transparent hover:border-emerald-200/60 transition-all duration-300"
+              className="group flex items-center gap-4 p-5 bg-card rounded-2xl border border-transparent hover:border-emerald-200/60 transition-all duration-300"
               style={{ boxShadow: "var(--shadow-subtle)" }}
             >
               <div className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0"
@@ -72,7 +72,7 @@ const Contact = () => {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 p-5 bg-white rounded-2xl border border-transparent hover:border-pink-200/60 transition-all duration-300"
+              className="group flex items-center gap-4 p-5 bg-card rounded-2xl border border-transparent hover:border-pink-200/60 transition-all duration-300"
               style={{ boxShadow: "var(--shadow-subtle)" }}
             >
               <div className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0"
@@ -98,10 +98,10 @@ const Contact = () => {
             </a>
 
             {/* Address */}
-            <div className="flex items-start gap-4 p-5 bg-white rounded-2xl"
+            <div className="flex items-start gap-4 p-5 bg-card rounded-2xl"
               style={{ boxShadow: "var(--shadow-subtle)" }}>
               <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: "hsl(345 55% 68% / 0.10)" }}>
+                style={{ background: "hsl(var(--rose) / 0.10)" }}>
                 <MapPin className="w-5 h-5" style={{ color: "hsl(var(--rose))" }} />
               </div>
               <div>

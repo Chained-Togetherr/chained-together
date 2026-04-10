@@ -109,10 +109,6 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         float: "float 3s ease-in-out infinite",
       },
-      transitionDuration: {
-        "350": "350ms",
-        "400": "400ms",
-      },
     },
   },
   plugins: [require("tailwindcss-animate")],

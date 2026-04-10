@@ -6,12 +6,14 @@ import Products from "@/components/Products";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import CartModal from "@/components/CartModal";
+import SeasonalDecorations from "@/components/SeasonalDecorations";
 
 const Index = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background">
+      <SeasonalDecorations />
       <Navbar onCartClick={() => setIsCartOpen(true)} />
       <main>
         <Hero />
