@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Gem, ArrowRight, Sparkles, Star } from "lucide-react";
-import { products, formatPrice } from "@/lib/store";
+import { products, formatPrice, getEffectivePrice, getDiscountPercentage } from "@/lib/store";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -83,17 +83,39 @@ const Products = () => {
                   >
                     {product.name}
                   </h3>
-                  <span
-                    className="text-xs md:text-sm font-semibold"
-                    style={{
-                      background: "linear-gradient(135deg, hsl(345 55% 60%), hsl(345 50% 52%))",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      fontFamily: "DM Sans, sans-serif",
-                    }}
-                  >
-                    {formatPrice(product.price)}
-                  </span>
+                  {product.discount && product.discountPrice ? (
+                    <div className="flex items-center gap-1.5">
+                      <span
+                        className="text-[10px] md:text-xs line-through text-muted-foreground/50"
+                        style={{ fontFamily: "DM Sans, sans-serif" }}
+                      >
+                        {formatPrice(product.price)}
+                      </span>
+                      <span
+                        className="text-xs md:text-sm font-semibold"
+                        style={{
+                          background: "linear-gradient(135deg, hsl(0 75% 50%), hsl(15 85% 45%))",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                          fontFamily: "DM Sans, sans-serif",
+                        }}
+                      >
+                        {formatPrice(getEffectivePrice(product))}
+                      </span>
+                    </div>
+                  ) : (
+                    <span
+                      className="text-xs md:text-sm font-semibold"
+                      style={{
+                        background: "linear-gradient(135deg, hsl(345 55% 60%), hsl(345 50% 52%))",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        fontFamily: "DM Sans, sans-serif",
+                      }}
+                    >
+                      {formatPrice(product.price)}
+                    </span>
+                  )}
                 </div>
 
                 {/* Blur / teaser overlay */}

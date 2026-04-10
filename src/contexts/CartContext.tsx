@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { Product, ProductVariant, CartItem } from "@/lib/store";
+import { Product, ProductVariant, CartItem, getEffectivePrice } from "@/lib/store";
 
 interface CartContextType {
   cart: CartItem[];
@@ -26,7 +26,7 @@ const getVariantKey = (productId: number, variant: ProductVariant): string => {
 };
 
 const calculateItemPrice = (product: Product, variant: ProductVariant, quantity: number): number => {
-  let price = product.price;
+  let price = getEffectivePrice(product);
   if (variant.hasBell && product.bellPrice) {
     price += product.bellPrice;
   }

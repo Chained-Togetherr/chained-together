@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Bell, BellOff, ChevronLeft, ChevronRight } from "lucide-react";
-import { Product, ProductVariant, formatPrice } from "@/lib/store";
+import { Product, ProductVariant, formatPrice, getEffectivePrice, getDiscountPercentage } from "@/lib/store";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
 
 interface VariantModalProps {
@@ -210,6 +210,15 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
   };
 
   const calculatePrice = () => {
+    let price = getEffectivePrice(product);
+    if (hasBell && product.bellPrice) price += product.bellPrice;
+    return price;
+  };
+
+  const hasDiscount = product.discount === true && !!product.discountPrice;
+  const discountPercent = getDiscountPercentage(product);
+
+  const calculateOriginalPrice = () => {
     let price = product.price;
     if (hasBell && product.bellPrice) price += product.bellPrice;
     return price;
@@ -466,18 +475,50 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                     >
                       {product.name}
                     </h3>
-                    <p
-                      className="font-semibold"
-                      style={{
-                        fontFamily: "DM Sans, sans-serif",
-                        background: "linear-gradient(135deg, hsl(345 55% 60%), hsl(345 50% 52%))",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        fontSize: "1.1rem",
-                      }}
-                    >
-                      {formatPrice(calculatePrice())}
-                    </p>
+                    {hasDiscount ? (
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="text-sm line-through text-muted-foreground/50"
+                          style={{ fontFamily: "DM Sans, sans-serif" }}
+                        >
+                          {formatPrice(calculateOriginalPrice())}
+                        </span>
+                        <span
+                          className="font-semibold"
+                          style={{
+                            fontFamily: "DM Sans, sans-serif",
+                            background: "linear-gradient(135deg, hsl(0 75% 50%), hsl(15 85% 45%))",
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent",
+                            fontSize: "1.1rem",
+                          }}
+                        >
+                          {formatPrice(calculatePrice())}
+                        </span>
+                        <span
+                          className="text-[10px] font-bold px-1.5 py-0.5 rounded-full text-white"
+                          style={{
+                            background: "linear-gradient(135deg, hsl(0 75% 55%), hsl(15 85% 50%))",
+                            fontFamily: "DM Sans, sans-serif",
+                          }}
+                        >
+                          -{discountPercent}%
+                        </span>
+                      </div>
+                    ) : (
+                      <p
+                        className="font-semibold"
+                        style={{
+                          fontFamily: "DM Sans, sans-serif",
+                          background: "linear-gradient(135deg, hsl(345 55% 60%), hsl(345 50% 52%))",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                          fontSize: "1.1rem",
+                        }}
+                      >
+                        {formatPrice(calculatePrice())}
+                      </p>
+                    )}
                   </div>
 
                   {/* Body */}
@@ -588,17 +629,29 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                         >
                           Total Harga
                         </span>
-                        <span
-                          className="text-2xl font-semibold"
-                          style={{
-                            fontFamily: "Cormorant Garamond, Georgia, serif",
-                            background: "linear-gradient(135deg, hsl(345 55% 56%), hsl(345 50% 48%))",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
-                          }}
-                        >
-                          {formatPrice(calculatePrice())}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          {hasDiscount && (
+                            <span
+                              className="text-sm line-through text-muted-foreground/50"
+                              style={{ fontFamily: "DM Sans, sans-serif" }}
+                            >
+                              {formatPrice(calculateOriginalPrice())}
+                            </span>
+                          )}
+                          <span
+                            className="text-2xl font-semibold"
+                            style={{
+                              fontFamily: "Cormorant Garamond, Georgia, serif",
+                              background: hasDiscount
+                                ? "linear-gradient(135deg, hsl(0 75% 50%), hsl(15 85% 45%))"
+                                : "linear-gradient(135deg, hsl(345 55% 56%), hsl(345 50% 48%))",
+                              WebkitBackgroundClip: "text",
+                              WebkitTextFillColor: "transparent",
+                            }}
+                          >
+                            {formatPrice(calculatePrice())}
+                          </span>
+                        </div>
                       </div>
                       <motion.button
                         whileHover={{ scale: canSubmit() ? 1.02 : 1 }}

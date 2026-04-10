@@ -7,7 +7,6 @@ import huruf4 from "@/assets/product/huruf/f4.jpeg";
 import huruf5 from "@/assets/product/huruf/f5.jpeg";
 import huruf6 from "@/assets/product/huruf/f6.jpeg";
 
-
 import productCherry from "@/assets/product/product-cherry.jpg";
 import productBunga from "@/assets/product/product-bunga.jpg";
 
@@ -28,6 +27,8 @@ export interface Product {
   bellPrice?: number;
   soldOut?: boolean;
   limited?: boolean;
+  discount?: boolean;
+  discountPrice?: number;
 }
 
 export interface CartItem {
@@ -36,6 +37,20 @@ export interface CartItem {
   quantity: number;
   totalPrice: number;
 }
+
+// Auto-calculate discount percentage from original and discounted price
+export const getDiscountPercentage = (product: Product): number => {
+  if (!product.discount || !product.discountPrice) return 0;
+  return Math.round((1 - product.discountPrice / product.price) * 100);
+};
+
+// Get the effective base price (discounted if applicable)
+export const getEffectivePrice = (product: Product): number => {
+  if (product.discount && product.discountPrice) {
+    return product.discountPrice;
+  }
+  return product.price;
+};
 
 export const products: Product[] = [
   {
@@ -50,30 +65,34 @@ export const products: Product[] = [
     bellPrice: 3000,
     limited: false,
     soldOut: false,
+    discount: false,
+    discountPrice: 0,
   },
   {
     id: 2,
     name: "Keychain Cherry",
     price: 5000,
     image: productCherry,
-    //images: [productCherry, productBunga],
     hasVariants: true,
     bellOption: true,
     bellPrice: 2000,
     limited: false,
     soldOut: false,
+    discount: false,
+    discountPrice: 0,
   },
   {
     id: 3,
     name: "Keychain Bunga",
     price: 5000,
     image: productBunga,
-    //images: [productBunga, productHuruf],
     hasVariants: true,
     bellOption: true,
     bellPrice: 2000,
     limited: false,
     soldOut: false,
+    discount: false,
+    discountPrice: 0,
   },
 ];
 

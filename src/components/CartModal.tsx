@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Plus, Minus, Trash2, ShoppingBag, MessageCircle } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useToastNotification } from "@/contexts/ToastContext";
-import { formatPrice, generateWhatsAppMessage, WHATSAPP_NUMBER } from "@/lib/store";
+import { formatPrice, generateWhatsAppMessage, WHATSAPP_NUMBER, getEffectivePrice, getDiscountPercentage } from "@/lib/store";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
 
 interface CartModalProps {
@@ -116,6 +116,17 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                         >
                           {item.product.name}
                         </h4>
+                        {item.product.discount && item.product.discountPrice && (
+                          <span
+                            className="inline-flex items-center gap-0.5 text-[9px] font-bold px-1.5 py-0.5 rounded-full text-white w-fit"
+                            style={{
+                              background: "linear-gradient(135deg, hsl(0 75% 55%), hsl(15 85% 50%))",
+                              fontFamily: "DM Sans, sans-serif",
+                            }}
+                          >
+                            -{getDiscountPercentage(item.product)}%
+                          </span>
+                        )}
                         <div className="flex flex-wrap gap-1.5 mt-1">
                           {item.variant.letter && (
                             <span
@@ -168,17 +179,41 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
-                        <p
-                          className="mt-2 font-semibold text-sm"
-                          style={{
-                            background: "linear-gradient(135deg, hsl(345 55% 60%), hsl(345 50% 52%))",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
-                            fontFamily: "DM Sans, sans-serif",
-                          }}
-                        >
-                          {formatPrice(item.totalPrice)}
-                        </p>
+                        {item.product.discount && item.product.discountPrice ? (
+                          <div className="mt-2 flex items-center gap-2">
+                            <span
+                              className="text-xs line-through text-muted-foreground/50"
+                              style={{ fontFamily: "DM Sans, sans-serif" }}
+                            >
+                              {formatPrice(
+                                (item.product.price + (item.variant.hasBell && item.product.bellPrice ? item.product.bellPrice : 0)) * item.quantity
+                              )}
+                            </span>
+                            <span
+                              className="font-semibold text-sm"
+                              style={{
+                                background: "linear-gradient(135deg, hsl(0 75% 50%), hsl(15 85% 45%))",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                                fontFamily: "DM Sans, sans-serif",
+                              }}
+                            >
+                              {formatPrice(item.totalPrice)}
+                            </span>
+                          </div>
+                        ) : (
+                          <p
+                            className="mt-2 font-semibold text-sm"
+                            style={{
+                              background: "linear-gradient(135deg, hsl(345 55% 60%), hsl(345 50% 52%))",
+                              WebkitBackgroundClip: "text",
+                              WebkitTextFillColor: "transparent",
+                              fontFamily: "DM Sans, sans-serif",
+                            }}
+                          >
+                            {formatPrice(item.totalPrice)}
+                          </p>
+                        )}
                       </div>
                     </motion.div>
                   ))}
