@@ -84,6 +84,22 @@
     --shadow-hover: 0 16px 44px -8px hsl(345 55% 68% / 0.30);
     --shadow-button: 0 4px 20px -4px hsl(345 55% 68% / 0.50);
     --shadow-subtle: 0 1px 8px -2px hsl(340 12% 16% / 0.07);
+
+    /* Modal theme variables */
+    --modal-bg: 0 0% 100%;
+    --modal-item-bg: 38 42% 97%;
+    --modal-accent-bg: 345 55% 68%;
+    --modal-dot-active: 345 55% 62%;
+    --modal-badge-letter-bg: 345 55% 68%;
+    --modal-badge-bell-bg: 275 35% 87%;
+    --modal-badge-bell-text: 275 30% 45%;
+    --modal-decoration-1: 345 55% 68%;
+    --modal-decoration-2: 275 35% 87%;
+    --modal-header-gradient: linear-gradient(135deg, hsl(345 55% 68% / 0.05), hsl(275 35% 87% / 0.08));
+    --modal-footer-gradient: linear-gradient(to top, hsl(0 0% 100%), hsl(0 0% 100% / 0.95));
+    --modal-image-bg: 38 42% 97%;
+    --modal-selected-ring: 345 55% 68%;
+    --modal-selected-bg: 345 55% 68%;
   }
 
   .dark {
@@ -176,6 +192,21 @@
   --shadow-hover: 0 16px 44px -8px hsl(145 45% 38% / 0.30);
   --shadow-button: 0 4px 20px -4px hsl(145 45% 38% / 0.50);
   --shadow-subtle: 0 1px 8px -2px hsl(145 20% 16% / 0.07);
+
+    --modal-bg: 140 10% 100%;
+    --modal-item-bg: 42 40% 96%;
+    --modal-accent-bg: 145 45% 38%;
+    --modal-dot-active: 145 45% 35%;
+    --modal-badge-letter-bg: 145 45% 38%;
+    --modal-badge-bell-bg: 42 55% 82%;
+    --modal-badge-bell-text: 42 50% 35%;
+    --modal-decoration-1: 145 45% 38%;
+    --modal-decoration-2: 42 60% 50%;
+    --modal-header-gradient: linear-gradient(135deg, hsl(145 45% 38% / 0.05), hsl(42 55% 82% / 0.08));
+    --modal-footer-gradient: linear-gradient(to top, hsl(140 10% 100%), hsl(140 10% 100% / 0.95));
+    --modal-image-bg: 42 40% 96%;
+    --modal-selected-ring: 145 45% 38%;
+    --modal-selected-bg: 145 45% 38%;
 }
 
 /* ── Kemerdekaan: Merah, Putih ── */
@@ -241,6 +272,21 @@
   --shadow-hover: 0 16px 44px -8px hsl(0 72% 50% / 0.30);
   --shadow-button: 0 4px 20px -4px hsl(0 72% 50% / 0.50);
   --shadow-subtle: 0 1px 8px -2px hsl(0 20% 16% / 0.07);
+
+    --modal-bg: 0 5% 100%;
+    --modal-item-bg: 0 8% 96%;
+    --modal-accent-bg: 0 72% 50%;
+    --modal-dot-active: 0 72% 48%;
+    --modal-badge-letter-bg: 0 72% 50%;
+    --modal-badge-bell-bg: 0 40% 85%;
+    --modal-badge-bell-text: 0 55% 35%;
+    --modal-decoration-1: 0 72% 50%;
+    --modal-decoration-2: 0 0% 85%;
+    --modal-header-gradient: linear-gradient(135deg, hsl(0 72% 50% / 0.05), hsl(0 40% 85% / 0.08));
+    --modal-footer-gradient: linear-gradient(to top, hsl(0 5% 100%), hsl(0 5% 100% / 0.95));
+    --modal-image-bg: 0 8% 96%;
+    --modal-selected-ring: 0 72% 50%;
+    --modal-selected-bg: 0 72% 50%;
 }
 
 /* ── Valentine: Merah Muda, Pink, Putih ── */
@@ -306,6 +352,21 @@
   --shadow-hover: 0 16px 44px -8px hsl(340 75% 55% / 0.30);
   --shadow-button: 0 4px 20px -4px hsl(340 75% 55% / 0.50);
   --shadow-subtle: 0 1px 8px -2px hsl(340 18% 15% / 0.07);
+
+    --modal-bg: 340 15% 100%;
+    --modal-item-bg: 330 25% 96%;
+    --modal-accent-bg: 340 75% 55%;
+    --modal-dot-active: 340 75% 52%;
+    --modal-badge-letter-bg: 340 75% 55%;
+    --modal-badge-bell-bg: 330 50% 85%;
+    --modal-badge-bell-text: 340 60% 38%;
+    --modal-decoration-1: 340 75% 55%;
+    --modal-decoration-2: 330 50% 85%;
+    --modal-header-gradient: linear-gradient(135deg, hsl(340 75% 55% / 0.05), hsl(330 50% 85% / 0.08));
+    --modal-footer-gradient: linear-gradient(to top, hsl(340 15% 100%), hsl(340 15% 100% / 0.95));
+    --modal-image-bg: 330 25% 96%;
+    --modal-selected-ring: 340 75% 55%;
+    --modal-selected-bg: 340 75% 55%;
 }
 
 /* ── Natal: Merah, Hijau, Emas ── */
@@ -371,6 +432,21 @@
   --shadow-hover: 0 16px 44px -8px hsl(0 65% 45% / 0.30);
   --shadow-button: 0 4px 20px -4px hsl(0 65% 45% / 0.50);
   --shadow-subtle: 0 1px 8px -2px hsl(0 15% 14% / 0.07);
+
+    --modal-bg: 0 5% 100%;
+    --modal-item-bg: 42 18% 95%;
+    --modal-accent-bg: 0 65% 45%;
+    --modal-dot-active: 0 65% 42%;
+    --modal-badge-letter-bg: 0 65% 45%;
+    --modal-badge-bell-bg: 140 50% 88%;
+    --modal-badge-bell-text: 140 35% 30%;
+    --modal-decoration-1: 0 65% 45%;
+    --modal-decoration-2: 140 50% 35%;
+    --modal-header-gradient: linear-gradient(135deg, hsl(0 65% 45% / 0.05), hsl(140 50% 88% / 0.08));
+    --modal-footer-gradient: linear-gradient(to top, hsl(0 5% 100%), hsl(0 5% 100% / 0.95));
+    --modal-image-bg: 42 18% 95%;
+    --modal-selected-ring: 0 65% 45%;
+    --modal-selected-bg: 0 65% 45%;
 }
 
 /* ── Semi (Spring): Pink Pastel, Hijau Muda, Kuning ── */
@@ -436,6 +512,21 @@
   --shadow-hover: 0 16px 44px -8px hsl(340 45% 72% / 0.30);
   --shadow-button: 0 4px 20px -4px hsl(340 45% 72% / 0.50);
   --shadow-subtle: 0 1px 8px -2px hsl(340 15% 18% / 0.07);
+
+    --modal-bg: 140 12% 100%;
+    --modal-item-bg: 140 15% 96%;
+    --modal-accent-bg: 340 50% 62%;
+    --modal-dot-active: 340 50% 58%;
+    --modal-badge-letter-bg: 340 50% 62%;
+    --modal-badge-bell-bg: 140 40% 85%;
+    --modal-badge-bell-text: 140 30% 35%;
+    --modal-decoration-1: 340 50% 62%;
+    --modal-decoration-2: 140 40% 55%;
+    --modal-header-gradient: linear-gradient(135deg, hsl(340 50% 62% / 0.05), hsl(140 40% 85% / 0.08));
+    --modal-footer-gradient: linear-gradient(to top, hsl(140 12% 100%), hsl(140 12% 100% / 0.95));
+    --modal-image-bg: 140 15% 96%;
+    --modal-selected-ring: 340 50% 62%;
+    --modal-selected-bg: 340 50% 62%;
 }
 
 /* ── Panas (Summer): Biru Laut, Kuning, Oranye ── */
@@ -501,6 +592,21 @@
   --shadow-hover: 0 16px 44px -8px hsl(200 70% 50% / 0.30);
   --shadow-button: 0 4px 20px -4px hsl(200 70% 50% / 0.50);
   --shadow-subtle: 0 1px 8px -2px hsl(200 20% 15% / 0.07);
+
+    --modal-bg: 45 15% 100%;
+    --modal-item-bg: 45 30% 96%;
+    --modal-accent-bg: 200 60% 48%;
+    --modal-dot-active: 200 60% 45%;
+    --modal-badge-letter-bg: 200 60% 48%;
+    --modal-badge-bell-bg: 45 60% 82%;
+    --modal-badge-bell-text: 45 50% 35%;
+    --modal-decoration-1: 200 60% 48%;
+    --modal-decoration-2: 45 70% 55%;
+    --modal-header-gradient: linear-gradient(135deg, hsl(200 60% 48% / 0.05), hsl(45 60% 82% / 0.08));
+    --modal-footer-gradient: linear-gradient(to top, hsl(45 15% 100%), hsl(45 15% 100% / 0.95));
+    --modal-image-bg: 45 30% 96%;
+    --modal-selected-ring: 200 60% 48%;
+    --modal-selected-bg: 200 60% 48%;
 }
 
 /* ── Gugur (Autumn/Fall): Coklat, Oranye, Merah Tua ── */
@@ -566,6 +672,21 @@
   --shadow-hover: 0 16px 44px -8px hsl(25 55% 45% / 0.30);
   --shadow-button: 0 4px 20px -4px hsl(25 55% 45% / 0.50);
   --shadow-subtle: 0 1px 8px -2px hsl(20 18% 16% / 0.07);
+
+    --modal-bg: 30 12% 100%;
+    --modal-item-bg: 30 25% 95%;
+    --modal-accent-bg: 25 55% 42%;
+    --modal-dot-active: 25 55% 38%;
+    --modal-badge-letter-bg: 25 55% 42%;
+    --modal-badge-bell-bg: 40 45% 80%;
+    --modal-badge-bell-text: 25 40% 30%;
+    --modal-decoration-1: 25 55% 42%;
+    --modal-decoration-2: 40 50% 55%;
+    --modal-header-gradient: linear-gradient(135deg, hsl(25 55% 42% / 0.05), hsl(40 45% 80% / 0.08));
+    --modal-footer-gradient: linear-gradient(to top, hsl(30 12% 100%), hsl(30 12% 100% / 0.95));
+    --modal-image-bg: 30 25% 95%;
+    --modal-selected-ring: 25 55% 42%;
+    --modal-selected-bg: 25 55% 42%;
 }
 
 /* ── Winter (Musim Dingin): Biru Muda, Putih, Abu-abu, Perak ── */
@@ -640,6 +761,21 @@
   --shadow-hover: 0 16px 44px -8px hsl(210 55% 55% / 0.30);
   --shadow-button: 0 4px 20px -4px hsl(210 55% 55% / 0.50);
   --shadow-subtle: 0 1px 8px -2px hsl(215 25% 15% / 0.07);
+
+    --modal-bg: 210 15% 100%;
+    --modal-item-bg: 210 18% 96%;
+    --modal-accent-bg: 210 55% 55%;
+    --modal-dot-active: 210 55% 50%;
+    --modal-badge-letter-bg: 210 55% 55%;
+    --modal-badge-bell-bg: 200 30% 85%;
+    --modal-badge-bell-text: 210 40% 35%;
+    --modal-decoration-1: 210 55% 55%;
+    --modal-decoration-2: 200 30% 70%;
+    --modal-header-gradient: linear-gradient(135deg, hsl(210 55% 55% / 0.05), hsl(200 30% 85% / 0.08));
+    --modal-footer-gradient: linear-gradient(to top, hsl(210 15% 100%), hsl(210 15% 100% / 0.95));
+    --modal-image-bg: 210 18% 96%;
+    --modal-selected-ring: 210 55% 55%;
+    --modal-selected-bg: 210 55% 55%;
 }
 
 

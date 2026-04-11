@@ -3,6 +3,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Bell, BellOff, ChevronLeft, ChevronRight } from "lucide-react";
 import { Product, ProductVariant, formatPrice, getEffectivePrice, getDiscountPercentage } from "@/lib/store";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
+import { getActiveTheme } from "@/config/theme";
+
+const themeEmojis: Record<string, string[]> = {
+  lebaran: ["🌙", "⭐"],
+  kemerdekaan: ["🇮🇩", "⭐"],
+  valentine: ["💕", "💗"],
+  natal: ["🎄", "❄️"],
+  semi: ["🌸", "🌿"],
+  panas: ["☀️", "🌊"],
+  gugur: ["🍂", "🍁"],
+  winter: ["❄️", "⛄"],
+  default: ["✿", "✨"],
+};
 
 interface VariantModalProps {
   product: Product | null;
@@ -308,9 +321,14 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
               onClick={(e) => e.stopPropagation()}
             >
               <div
-                className="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col"
-                style={{ maxHeight: "100%" }}
-              >
+              className="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col relative"
+              style={{ maxHeight: "100%", background: "hsl(var(--modal-bg))" }}
+            >
+              {/* Theme decorative orbs */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl" style={{ zIndex: 0 }}>
+                <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full opacity-[0.05] blur-3xl" style={{ background: "hsl(var(--modal-decoration-1))" }} />
+                <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full opacity-[0.04] blur-3xl" style={{ background: "hsl(var(--modal-decoration-2))" }} />
+              </div>
                 {/* Image Carousel — fixed height, images slide inside */}
                 <div
                   ref={imageContainerRef}
@@ -318,7 +336,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                   style={{
                     // Responsive image height
                     height: "clamp(180px, 36vw, 280px)",
-                    background: "hsl(38 42% 97%)",
+                    background: "hsl(var(--modal-image-bg))",
                     borderTopLeftRadius: "1.5rem",
                     borderTopRightRadius: "1.5rem",
                     cursor: hasMultiple ? (isDragging ? "grabbing" : "grab") : "default",
@@ -361,7 +379,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                         alt={`${product.name} foto ${currentImageIndex + 1}`}
                         className="w-full h-full object-contain"
                         style={{
-                          background: "hsl(38 42% 97%)",
+                          background: "hsl(var(--modal-image-bg))",
                           userSelect: "none",
                           pointerEvents: "none",
                         }}
@@ -391,7 +409,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                         alt="preview"
                         className="w-full h-full object-contain"
                         style={{
-                          background: "hsl(38 42% 97%)",
+                          background: "hsl(var(--modal-image-bg))",
                           userSelect: "none",
                           pointerEvents: "none",
                         }}
@@ -445,7 +463,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                             height: "6px",
                             background:
                               i === currentImageIndex
-                                ? "hsl(345 55% 62%)"
+                                ? "hsl(var(--modal-dot-active))"
                                 : "rgba(255,255,255,0.7)",
                             boxShadow: "0 1px 3px rgba(0,0,0,0.3)",
                           }}
@@ -458,13 +476,16 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                 {/* Scrollable content area */}
                 <div className="overflow-y-auto flex-1 modal-scroll">
                   {/* Header */}
-                  <div className="px-6 pt-4 pb-4 border-b border-border/50">
-                    <p
-                      className="text-[10px] tracking-widest uppercase text-muted-foreground mb-1"
-                      style={{ fontFamily: "DM Sans, sans-serif", letterSpacing: "0.12em" }}
-                    >
-                      Pilih Varian
-                    </p>
+                  <div className="px-6 pt-4 pb-4 border-b border-border/50" style={{ background: "var(--modal-header-gradient)" }}>
+                    <div className="flex items-center justify-between">
+                      <p
+                        className="text-[10px] tracking-widest uppercase text-muted-foreground mb-1"
+                        style={{ fontFamily: "DM Sans, sans-serif", letterSpacing: "0.12em" }}
+                      >
+                        Pilih Varian
+                      </p>
+                      <span className="opacity-30 text-sm">{(themeEmojis[getActiveTheme()] || themeEmojis.default).join(" ")}</span>
+                    </div>
                     <h3
                       className="font-medium text-foreground mb-1.5"
                       style={{
@@ -487,7 +508,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                           className="font-semibold"
                           style={{
                             fontFamily: "DM Sans, sans-serif",
-                            background: "linear-gradient(135deg, hsl(0 75% 50%), hsl(15 85% 45%))",
+                            background: "var(--price-gradient-discount)",
                             WebkitBackgroundClip: "text",
                             WebkitTextFillColor: "transparent",
                             fontSize: "1.1rem",
@@ -498,7 +519,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                         <span
                           className="text-[10px] font-bold px-1.5 py-0.5 rounded-full text-white"
                           style={{
-                            background: "linear-gradient(135deg, hsl(0 75% 55%), hsl(15 85% 50%))",
+                            background: "var(--price-gradient-discount)",
                             fontFamily: "DM Sans, sans-serif",
                           }}
                         >
@@ -510,7 +531,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                         className="font-semibold"
                         style={{
                           fontFamily: "DM Sans, sans-serif",
-                          background: "linear-gradient(135deg, hsl(345 55% 60%), hsl(345 50% 52%))",
+                          background: "var(--price-gradient)",
                           WebkitBackgroundClip: "text",
                           WebkitTextFillColor: "transparent",
                           fontSize: "1.1rem",
@@ -534,7 +555,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                           {selectedLetter && (
                             <span
                               className="ml-2 px-2.5 py-0.5 rounded-full text-white text-[10px] normal-case tracking-normal"
-                              style={{ background: "hsl(var(--rose))" }}
+                              style={{ background: "hsl(var(--modal-accent-bg))" }}
                             >
                               {selectedLetter} dipilih
                             </span>
@@ -554,7 +575,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                                 selectedLetter === letter
                                   ? {
                                       background:
-                                        "linear-gradient(135deg, hsl(345 55% 68%), hsl(345 50% 58%))",
+                                        "var(--btn-primary-gradient)",
                                       fontFamily: "Cormorant Garamond, Georgia, serif",
                                     }
                                   : { fontFamily: "Cormorant Garamond, Georgia, serif" }
@@ -589,7 +610,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                               !hasBell
                                 ? {
                                     background:
-                                      "linear-gradient(135deg, hsl(345 55% 68%), hsl(345 50% 58%))",
+                                      "var(--btn-primary-gradient)",
                                     fontFamily: "DM Sans, sans-serif",
                                   }
                                 : { fontFamily: "DM Sans, sans-serif" }
@@ -607,7 +628,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                               hasBell
                                 ? {
                                     background:
-                                      "linear-gradient(135deg, hsl(345 55% 68%), hsl(345 50% 58%))",
+                                      "var(--btn-primary-gradient)",
                                     fontFamily: "DM Sans, sans-serif",
                                   }
                                 : { fontFamily: "DM Sans, sans-serif" }
@@ -643,8 +664,8 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                             style={{
                               fontFamily: "Cormorant Garamond, Georgia, serif",
                               background: hasDiscount
-                                ? "linear-gradient(135deg, hsl(0 75% 50%), hsl(15 85% 45%))"
-                                : "linear-gradient(135deg, hsl(345 55% 56%), hsl(345 50% 48%))",
+                                ? "var(--price-gradient-discount)"
+                                : "var(--price-gradient)",
                               WebkitBackgroundClip: "text",
                               WebkitTextFillColor: "transparent",
                             }}
@@ -663,7 +684,7 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                           canSubmit()
                             ? {
                                 background:
-                                  "linear-gradient(135deg, hsl(345 55% 68%), hsl(345 50% 58%))",
+                                  "var(--btn-primary-gradient)",
                                 color: "white",
                                 boxShadow: "var(--shadow-button)",
                                 fontFamily: "DM Sans, sans-serif",
