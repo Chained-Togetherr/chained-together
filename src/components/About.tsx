@@ -1,21 +1,40 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Heart, Sparkles, Star } from "lucide-react";
+import { SectionDecorations } from "@/components/SeasonalDecorations";
+
+const HandmadeIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+  </svg>
+);
+
+const CustomIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+  </svg>
+);
+
+const QualityIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="8" r="6"/>
+    <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+  </svg>
+);
 
 const About = () => {
   const features = [
     {
-      icon: Heart,
+      icon: HandmadeIcon,
       title: "Handmade",
       description: "Setiap produk dibuat dengan tangan sendiri.",
     },
     {
-      icon: Sparkles,
+      icon: CustomIcon,
       title: "Custom",
       description: "Personalisasi huruf sesuai keinginanmu untuk sentuhan unik.",
     },
     {
-      icon: Star,
+      icon: QualityIcon,
       title: "Quality",
       description: "Material dipilih untuk keindahan yang maksimal.",
     },
@@ -23,13 +42,16 @@ const About = () => {
 
   return (
     <section id="tentang" className="py-20 md:py-28 relative overflow-hidden" style={{ background: "hsl(var(--section-alt-bg))" }}>
-      {/* Decorative background */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Seasonal decorations */}
+      <SectionDecorations section="tentang" />
+
+      {/* Static decorative lines */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>
         <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, hsl(var(--section-line-color) / 0.4), transparent)" }} />
         <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "linear-gradient(90deg, transparent, hsl(var(--section-line-color) / 0.4), transparent)" }} />
       </div>
 
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 relative" style={{ zIndex: 2 }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -75,7 +97,7 @@ const About = () => {
                 className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300"
                 style={{ background: "var(--feature-icon-bg)" }}
               >
-                <feature.icon className="w-5 h-5" style={{ color: "hsl(var(--rose))" }} />
+                <feature.icon />
               </div>
 
               <h3

@@ -2,13 +2,16 @@ import React from "react";
 import { motion } from "framer-motion";
 import { MessageCircle, MapPin, Instagram, Phone } from "lucide-react";
 import { WHATSAPP_NUMBER, INSTAGRAM_URL } from "@/lib/store";
+import { SectionDecorations } from "@/components/SeasonalDecorations";
 
 const Contact = () => {
   const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}`;
 
   return (
-    <section id="kontak" className="py-20 md:py-28" style={{ background: "hsl(var(--section-alt-bg))" }}>
-      <div className="container mx-auto px-6">
+    <section id="kontak" className="py-20 md:py-28 relative overflow-hidden" style={{ background: "hsl(var(--section-alt-bg))" }}>
+      {/* Seasonal decorations */}
+      <SectionDecorations section="kontak" />
+      <div className="container mx-auto px-6 relative" style={{ zIndex: 2 }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

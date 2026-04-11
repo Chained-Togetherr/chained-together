@@ -1,8 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ChevronDown, Sparkles } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import { getThemeData } from "@/config/theme";
+
+const SparkleIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3L13.5 8.5L19 10L13.5 11.5L12 17L10.5 11.5L5 10L10.5 8.5Z"/>
+    <path d="M5 3L5.75 5.25L8 6L5.75 6.75L5 9L4.25 6.75L2 6L4.25 5.25Z"/>
+    <path d="M19 17L19.5 18.5L21 19L19.5 19.5L19 21L18.5 19.5L17 19L18.5 18.5Z"/>
+  </svg>
+);
 
 const Hero = () => {
   const themeData = getThemeData();
@@ -130,7 +138,7 @@ const Hero = () => {
                 maxWidth: "260px",
               }}
             >
-              <Sparkles className="w-4 h-4 flex-shrink-0" />
+              <SparkleIcon />
               Lihat Koleksi
             </motion.button>
 

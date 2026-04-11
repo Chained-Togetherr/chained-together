@@ -1,15 +1,36 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { Gem, ArrowRight, Sparkles, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { products, formatPrice, getEffectivePrice, getDiscountPercentage } from "@/lib/store";
+import { SectionDecorations } from "@/components/SeasonalDecorations";
+
+const GemIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="6 3 18 3 22 9 12 22 2 9"/>
+    <line x1="2" y1="9" x2="22" y2="9"/>
+    <line x1="12" y1="3" x2="6" y2="9"/>
+    <line x1="12" y1="3" x2="18" y2="9"/>
+  </svg>
+);
+
+const SparkleIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3L13.5 8.5L19 10L13.5 11.5L12 17L10.5 11.5L5 10L10.5 8.5Z"/>
+    <path d="M5 3L5.75 5.25L8 6L5.75 6.75L5 9L4.25 6.75L2 6L4.25 5.25Z"/>
+    <path d="M19 17L19.5 18.5L21 19L19.5 19.5L19 21L18.5 19.5L17 19L18.5 18.5Z"/>
+  </svg>
+);
 
 const Products = () => {
   const navigate = useNavigate();
 
   return (
     <section id="produk" className="py-24 md:py-32 bg-background relative overflow-hidden">
-      {/* Background decorations */}
+      {/* Seasonal decorations */}
+      <SectionDecorations section="produk" />
+
+      {/* Background orbs */}
       <div className="absolute inset-0 pointer-events-none -z-0">
         <div
           className="absolute top-10 right-[-8%] w-[500px] h-[500px] rounded-full opacity-25 blur-3xl"
@@ -32,7 +53,7 @@ const Products = () => {
         >
           <div className="flex items-center justify-center mb-5">
             <span className="section-label">
-              <Gem className="w-3 h-3" />
+            <GemIcon />
               Koleksi Kami
             </span>
           </div>
@@ -161,7 +182,7 @@ const Products = () => {
           >
             {/* Shimmer effect */}
             <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
-            <Sparkles className="w-4 h-4" />
+            <SparkleIcon />
             Telusuri Produk Kami
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </motion.button>

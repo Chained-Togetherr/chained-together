@@ -5,16 +5,140 @@ import { Product, ProductVariant, formatPrice, getEffectivePrice, getDiscountPer
 import { useScrollLock } from "@/hooks/use-scroll-lock";
 import { getActiveTheme } from "@/config/theme";
 
-const themeEmojis: Record<string, string[]> = {
-  lebaran: ["🌙", "⭐"],
-  kemerdekaan: ["🇮🇩", "⭐"],
-  valentine: ["💕", "💗"],
-  natal: ["🎄", "❄️"],
-  semi: ["🌸", "🌿"],
-  panas: ["☀️", "🌊"],
-  gugur: ["🍂", "🍁"],
-  winter: ["❄️", "⛄"],
-  default: ["✿", "✨"],
+const themeIcons: Record<string, React.FC<{ size?: number; style?: React.CSSProperties }>[]> = {
+  lebaran: [
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 60 60" fill="none">
+        <path d="M35 10 A20 20 0 1 0 35 50 A15 15 0 1 1 35 10" fill="currentColor" stroke="currentColor" strokeWidth="0.8"/>
+        <circle cx="22" cy="18" r="2" fill="currentColor"/>
+      </svg>
+    ),
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+        <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" fill="currentColor"/>
+      </svg>
+    ),
+  ],
+  kemerdekaan: [
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 80 50" fill="none">
+        <rect x="5" y="5" width="70" height="20" rx="2" fill="currentColor"/>
+        <rect x="5" y="25" width="70" height="20" rx="2" fill="currentColor" opacity="0.3"/>
+        <line x1="5" y1="5" x2="5" y2="50" stroke="currentColor" strokeWidth="2" opacity="0.7"/>
+      </svg>
+    ),
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+        <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" fill="currentColor"/>
+      </svg>
+    ),
+  ],
+  valentine: [
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 60 60" fill="none">
+        <path d="M30 50 C10 35 0 20 15 12 C22 8 28 12 30 18 C32 12 38 8 45 12 C60 20 50 35 30 50Z" fill="currentColor"/>
+      </svg>
+    ),
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
+        <path d="M20 34 C6 24 0 14 10 8 C14 5 17 7 20 12 C23 7 26 5 30 8 C40 14 34 24 20 34Z" fill="currentColor" opacity="0.6"/>
+      </svg>
+    ),
+  ],
+  natal: [
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 60 80" fill="none">
+        <polygon points="30,5 10,35 50,35" fill="currentColor" opacity="0.8"/>
+        <polygon points="30,20 5,55 55,55" fill="currentColor" opacity="0.7"/>
+        <rect x="25" y="55" width="10" height="15" rx="1" fill="currentColor" opacity="0.6"/>
+        <circle cx="30" cy="12" r="2.5" fill="currentColor"/>
+      </svg>
+    ),
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 80 80" fill="none">
+        <path d="M40 5v70M5 40h70M15 15l50 50M65 15L15 65" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <circle cx="40" cy="40" r="5" fill="currentColor" opacity="0.4"/>
+      </svg>
+    ),
+  ],
+  semi: [
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="20" r="9" fill="currentColor" opacity="0.5"/>
+        <circle cx="20" cy="32" r="9" fill="currentColor" opacity="0.5"/>
+        <circle cx="40" cy="32" r="9" fill="currentColor" opacity="0.5"/>
+        <circle cx="25" cy="42" r="9" fill="currentColor" opacity="0.5"/>
+        <circle cx="35" cy="42" r="9" fill="currentColor" opacity="0.5"/>
+        <circle cx="30" cy="31" r="5" fill="currentColor" opacity="0.9"/>
+      </svg>
+    ),
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 60 60" fill="none">
+        <path d="M30 55 L30 25 M30 25 Q15 20 10 8 Q20 15 30 12 Q40 15 50 8 Q45 20 30 25" fill="currentColor" opacity="0.7"/>
+      </svg>
+    ),
+  ],
+  panas: [
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="30" r="11" fill="currentColor"/>
+        <path d="M30 5 L30 12 M30 48 L30 55 M5 30 L12 30 M48 30 L55 30 M11 11 L16 16 M44 44 L49 49 M49 11 L44 16 M16 44 L11 49" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 80 40" fill="none">
+        <path d="M5 30 Q20 10 35 25 Q50 10 65 25 Q80 10 85 20" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+        <path d="M5 38 Q20 18 35 33 Q50 18 65 33 Q80 18 85 28" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" opacity="0.4"/>
+      </svg>
+    ),
+  ],
+  gugur: [
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 60 60" fill="none">
+        <path d="M30 55 L30 30 M30 30 Q15 25 10 10 Q20 18 30 15 Q40 18 50 10 Q45 25 30 30" fill="currentColor"/>
+      </svg>
+    ),
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 60 60" fill="none">
+        <path d="M10 20 Q25 15 30 30 Q35 15 50 20" stroke="currentColor" strokeWidth="1.5" fill="currentColor" fillOpacity="0.4"/>
+        <line x1="30" y1="33" x2="30" y2="50" stroke="currentColor" strokeWidth="1.5" opacity="0.5"/>
+      </svg>
+    ),
+  ],
+  winter: [
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 80 80" fill="none">
+        <path d="M40 5v70M5 40h70M15 15l50 50M65 15L15 65" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <circle cx="40" cy="40" r="5" fill="currentColor" opacity="0.4"/>
+        <path d="M40 15l-5-6M40 15l5-6M40 65l-5 6M40 65l5 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="20" r="12" fill="currentColor" opacity="0.3"/>
+        <ellipse cx="30" cy="45" rx="12" ry="8" fill="currentColor" opacity="0.2"/>
+        <circle cx="24" cy="22" r="2" fill="currentColor" opacity="0.5"/>
+        <circle cx="36" cy="22" r="2" fill="currentColor" opacity="0.5"/>
+      </svg>
+    ),
+  ],
+  default: [
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="20" r="9" fill="currentColor" opacity="0.5"/>
+        <circle cx="20" cy="32" r="9" fill="currentColor" opacity="0.5"/>
+        <circle cx="40" cy="32" r="9" fill="currentColor" opacity="0.5"/>
+        <circle cx="25" cy="42" r="9" fill="currentColor" opacity="0.5"/>
+        <circle cx="35" cy="42" r="9" fill="currentColor" opacity="0.5"/>
+        <circle cx="30" cy="31" r="5" fill="currentColor" opacity="0.9"/>
+      </svg>
+    ),
+    ({ size = 20 }) => (
+      <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+        <path d="M12 3 L13.5 8 L18.5 8 L14.5 11 L16 16 L12 13 L8 16 L9.5 11 L5.5 8 L10.5 8 Z" fill="currentColor"/>
+      </svg>
+    ),
+  ],
 };
 
 interface VariantModalProps {
@@ -484,7 +608,11 @@ const VariantModal = ({ product, isOpen, onClose, onConfirm }: VariantModalProps
                       >
                         Pilih Varian
                       </p>
-                      <span className="opacity-30 text-sm">{(themeEmojis[getActiveTheme()] || themeEmojis.default).join(" ")}</span>
+                      <span className="opacity-25 flex gap-1.5 items-center text-primary">
+                        {(themeIcons[getActiveTheme()] || themeIcons.default).map((IconComponent, i) => (
+                          <IconComponent key={i} size={14} />
+                        ))}
+                      </span>
                     </div>
                     <h3
                       className="font-medium text-foreground mb-1.5"
