@@ -3,12 +3,13 @@ export const seasonalThemes = {
   temaKemerdekaan: false,   // HUT RI
   temaValentine: false,     // Valentine
   temaNatal: false,         // Natal
-  temaSemi: false,           // Spring
-  temaPanas: true,         // Summer
+  temaSemi: false,          // Spring
+  temaPanas: true,          // Summer
   temaGugur: false,         // Autumn
+  temaWinter: false,        // Winter
 } as const;
 
-export type ThemeName = "lebaran" | "kemerdekaan" | "valentine" | "natal" | "semi" | "panas" | "gugur" | "default";
+export type ThemeName = "lebaran" | "kemerdekaan" | "valentine" | "natal" | "semi" | "panas" | "gugur" | "winter" | "default";
 
 export function getActiveTheme(): ThemeName {
   if (seasonalThemes.temaLebaran) return "lebaran";
@@ -18,6 +19,7 @@ export function getActiveTheme(): ThemeName {
   if (seasonalThemes.temaSemi) return "semi";
   if (seasonalThemes.temaPanas) return "panas";
   if (seasonalThemes.temaGugur) return "gugur";
+  if (seasonalThemes.temaWinter) return "winter";
   return "default";
 }
 
@@ -67,6 +69,11 @@ export const themeDataMap: Record<ThemeName, ThemeData> = {
     name: "gugur",
     cssClass: "theme-gugur",
     heroOverlayGradient: "linear-gradient(155deg, hsl(25 60% 30% / 0.85) 0%, hsl(15 55% 35% / 0.78) 50%, hsl(40 50% 28% / 0.82) 100%)",
+  },
+  winter: {
+    name: "winter",
+    cssClass: "theme-winter",
+    heroOverlayGradient: "linear-gradient(155deg, hsl(210 45% 30% / 0.85) 0%, hsl(200 30% 50% / 0.72) 50%, hsl(220 35% 25% / 0.88) 100%)",
   },
 };
 

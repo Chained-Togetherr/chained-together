@@ -25,7 +25,8 @@ const ThemeApplicator = ({ children }: { children: React.ReactNode }) => {
       "theme-natal",
       "theme-semi",
       "theme-panas",
-      "theme-gugur"
+      "theme-gugur",
+      "theme-winter"
     );
     if (data.cssClass) {
       document.documentElement.classList.add(data.cssClass);
