@@ -4,7 +4,7 @@ export const seasonalThemes = {
   temaValentine: false,     // Valentine
   temaNatal: false,         // Natal
   temaSemi: false,          // Spring
-  temaPanas: false,          // Summer
+  temaPanas: true,          // Summer
   temaGugur: false,         // Autumn
   temaWinter: false,        // Winter
 } as const;
