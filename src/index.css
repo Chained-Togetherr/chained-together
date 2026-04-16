@@ -782,438 +782,156 @@
 /* ══════════════════════════════════════════════════════════
    SEASONAL PARTICLE ANIMATION
    ══════════════════════════════════════════════════════════ */
-@keyframes seasonFall {
-  0% {
-    transform: translateY(-10vh) translateX(0) rotate(0deg);
-    opacity: 0;
-  }
-  8%  { opacity: 0.75; }
-  50% { transform: translateY(55vh) translateX(var(--drift, 0px)) rotate(180deg); opacity: 0.55; }
-  92% { opacity: 0.35; }
-  100% {
-    transform: translateY(112vh) translateX(calc(var(--drift, 0px) * 1.5)) rotate(360deg);
-    opacity: 0;
-  }
-}
 
-@keyframes seasonDrift {
-  0%   { transform: translateX(0) rotate(0deg);   }
-  33%  { transform: translateX(12px) rotate(5deg); }
-  66%  { transform: translateX(-8px) rotate(-4deg); }
-  100% { transform: translateX(0) rotate(0deg);   }
+@keyframes seasonFall {
+  0%   { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+  8%   { opacity: 0.7; }
+  92%  { opacity: 0.3; }
+  100% { transform: translateY(112vh) translateX(var(--drift, 0px)) rotate(360deg); opacity: 0; }
 }
 
 .seasonal-particle {
   position: absolute;
   top: -24px;
   animation: seasonFall linear infinite;
-  will-change: transform, opacity;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.08));
-}
-
-/* Summer particles glow */
-.theme-panas .seasonal-particle {
-  filter: drop-shadow(0 0 4px hsl(42 90% 65% / 0.4));
-}
-
-/* Winter particles blur-glimmer */
-.theme-winter .seasonal-particle {
-  filter: drop-shadow(0 0 3px hsl(210 70% 85% / 0.5));
-}
-
-/* Valentine particles soft glow */
-.theme-valentine .seasonal-particle {
-  filter: drop-shadow(0 0 3px hsl(345 65% 72% / 0.45));
+  /* NO will-change, NO filter/drop-shadow — these are the main culprits on mobile */
 }
 
 /* ══════════════════════════════════════════════════════════
-   SEASONAL SECTION ATMOSPHERE
+   SEASONAL SECTION ATMOSPHERE — simplified, no heavy pseudo overlays
    ══════════════════════════════════════════════════════════ */
 
-/* ════════════════════════════════════════════════════════════════════
-   ☀️  SUMMER (PANAS) — Ocean + Sun + Tropics
-   ════════════════════════════════════════════════════════════════════ */
-.theme-panas #home { position: relative; }
-.theme-panas #home::after {
-  content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 130px;
-  background: linear-gradient(to top, hsl(200 70% 40% / 0.20) 0%, hsl(200 60% 55% / 0.09) 55%, transparent 100%);
-  pointer-events: none; z-index: 5;
-}
+/* ☀️  SUMMER (PANAS) */
 .theme-panas #tentang {
-  background: linear-gradient(160deg,
-    hsl(48 80% 96%) 0%, hsl(200 45% 95%) 45%, hsl(170 35% 96%) 100%) !important;
-  position: relative;
-}
-.theme-panas #tentang::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 55% 40% at 90% 10%, hsl(45 95% 65% / 0.12), transparent 65%),
-    radial-gradient(ellipse 45% 35% at 5% 90%, hsl(200 70% 55% / 0.10), transparent 65%);
+  background: linear-gradient(160deg, hsl(48 80% 96%) 0%, hsl(200 45% 95%) 45%, hsl(170 35% 96%) 100%) !important;
 }
 .theme-panas #produk {
-  background: linear-gradient(180deg,
-    hsl(45 35% 99%) 0%, hsl(200 30% 97%) 55%, hsl(170 25% 98%) 100%) !important;
-  position: relative;
-}
-.theme-panas #produk::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 50% 30% at 10% 5%, hsl(45 90% 62% / 0.10), transparent 60%),
-    radial-gradient(ellipse 40% 25% at 95% 95%, hsl(200 65% 52% / 0.09), transparent 60%);
+  background: linear-gradient(180deg, hsl(45 35% 99%) 0%, hsl(200 30% 97%) 100%) !important;
 }
 .theme-panas #kontak {
-  background: linear-gradient(150deg,
-    hsl(200 40% 95%) 0%, hsl(48 65% 96%) 50%, hsl(170 30% 96%) 100%) !important;
-  position: relative;
-}
-.theme-panas #kontak::before {
-  content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 80px; pointer-events: none; z-index: 0;
-  background: linear-gradient(to top, hsl(200 60% 45% / 0.10), transparent);
+  background: linear-gradient(150deg, hsl(200 40% 95%) 0%, hsl(48 65% 96%) 100%) !important;
 }
 .theme-panas footer {
   background: linear-gradient(135deg, hsl(200 60% 13%) 0%, hsl(25 50% 11%) 100%) !important;
 }
-.theme-panas .seasonal-particle { filter: drop-shadow(0 0 5px hsl(45 95% 65% / 0.45)); }
 
-/* ════════════════════════════════════════════════════════════════════
-   ❄️  WINTER — Ice + Snow + Frost
-   ════════════════════════════════════════════════════════════════════ */
-.theme-winter #home { position: relative; }
-.theme-winter #home::after {
-  content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
-  background: linear-gradient(to top, hsl(210 60% 30% / 0.15) 0%, transparent 100%);
-  pointer-events: none; z-index: 5;
-}
-.theme-winter #tentang,
-.theme-winter #produk,
-.theme-winter #kontak { position: relative; }
-
+/* ❄️  WINTER */
 .theme-winter #tentang {
-  background: linear-gradient(160deg,
-    hsl(215 40% 97%) 0%, hsl(200 35% 96%) 50%, hsl(220 30% 97%) 100%) !important;
-}
-.theme-winter #tentang::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 8% 15%, hsl(210 65% 70% / 0.10), transparent 65%),
-    radial-gradient(ellipse 50% 40% at 92% 85%, hsl(195 55% 75% / 0.08), transparent 60%),
-    radial-gradient(ellipse 30% 25% at 50% 50%, hsl(210 40% 82% / 0.06), transparent 70%);
+  background: linear-gradient(160deg, hsl(215 40% 97%) 0%, hsl(200 35% 96%) 50%, hsl(220 30% 97%) 100%) !important;
 }
 .theme-winter #produk {
   background: linear-gradient(175deg, hsl(210 30% 99%) 0%, hsl(215 25% 97%) 100%) !important;
 }
-.theme-winter #produk::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 70% 40% at 0% 0%, hsl(210 60% 72% / 0.09), transparent 60%),
-    radial-gradient(ellipse 55% 35% at 100% 100%, hsl(200 50% 78% / 0.08), transparent 60%);
-}
 .theme-winter #kontak {
   background: linear-gradient(145deg, hsl(215 35% 96%) 0%, hsl(205 30% 97%) 100%) !important;
-}
-.theme-winter #kontak::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 80% 30% at 50% 0%, hsl(210 55% 80% / 0.10), transparent 60%);
 }
 .theme-winter footer {
   background: linear-gradient(135deg, hsl(215 45% 11%) 0%, hsl(205 35% 14%) 100%) !important;
 }
-.theme-winter .seasonal-particle { filter: drop-shadow(0 0 4px hsl(210 75% 85% / 0.55)); }
-/* Frost shimmer on cards */
 .theme-winter .bg-card {
   background: linear-gradient(135deg, hsl(215 30% 100%) 0%, hsl(205 25% 99%) 100%) !important;
   border-color: hsl(210 40% 90%) !important;
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   💕  VALENTINE — Rose + Pink + Hearts
-   ════════════════════════════════════════════════════════════════════ */
-.theme-valentine #home { position: relative; }
-.theme-valentine #home::after {
-  content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 110px;
-  background: linear-gradient(to top, hsl(345 65% 35% / 0.14) 0%, transparent 100%);
-  pointer-events: none; z-index: 5;
-}
+/* 💕  VALENTINE */
 .theme-valentine #tentang {
-  background: linear-gradient(155deg,
-    hsl(350 60% 97%) 0%, hsl(320 45% 96%) 45%, hsl(355 55% 97%) 100%) !important;
-  position: relative;
-}
-.theme-valentine #tentang::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 55% 45% at 92% 8%, hsl(345 80% 68% / 0.10), transparent 65%),
-    radial-gradient(ellipse 45% 40% at 5% 92%, hsl(320 65% 72% / 0.09), transparent 60%),
-    radial-gradient(ellipse 35% 30% at 50% 50%, hsl(340 60% 78% / 0.05), transparent 70%);
+  background: linear-gradient(155deg, hsl(350 60% 97%) 0%, hsl(320 45% 96%) 45%, hsl(355 55% 97%) 100%) !important;
 }
 .theme-valentine #produk {
   background: linear-gradient(175deg, hsl(350 40% 99%) 0%, hsl(330 30% 98%) 100%) !important;
-  position: relative;
-}
-.theme-valentine #produk::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 60% 35% at 5% 5%, hsl(345 70% 72% / 0.09), transparent 60%),
-    radial-gradient(ellipse 50% 30% at 98% 98%, hsl(320 60% 68% / 0.08), transparent 60%);
 }
 .theme-valentine #kontak {
   background: linear-gradient(150deg, hsl(340 50% 96%) 0%, hsl(355 55% 97%) 100%) !important;
-  position: relative;
-}
-.theme-valentine #kontak::before {
-  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 60px; pointer-events: none; z-index: 0;
-  background: linear-gradient(to bottom, hsl(345 65% 72% / 0.07), transparent);
 }
 .theme-valentine footer {
   background: linear-gradient(135deg, hsl(345 40% 12%) 0%, hsl(320 30% 14%) 100%) !important;
 }
-.theme-valentine .seasonal-particle { filter: drop-shadow(0 0 4px hsl(345 75% 72% / 0.50)); }
-/* Soft rose tint on cards */
 .theme-valentine .bg-card {
   background: linear-gradient(135deg, hsl(350 30% 100%) 0%, hsl(330 20% 99%) 100%) !important;
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   🌙  LEBARAN — Emerald + Gold + Lantern
-   ════════════════════════════════════════════════════════════════════ */
-.theme-lebaran #home { position: relative; }
-.theme-lebaran #home::after {
-  content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 110px;
-  background: linear-gradient(to top, hsl(145 50% 20% / 0.16) 0%, transparent 100%);
-  pointer-events: none; z-index: 5;
-}
+/* 🌙  LEBARAN */
 .theme-lebaran #tentang {
-  background: linear-gradient(160deg,
-    hsl(42 55% 96%) 0%, hsl(145 22% 96%) 45%, hsl(45 48% 97%) 100%) !important;
-  position: relative;
-}
-.theme-lebaran #tentang::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 55% 45% at 90% 10%, hsl(42 80% 55% / 0.11), transparent 65%),
-    radial-gradient(ellipse 45% 40% at 5% 90%, hsl(145 50% 42% / 0.09), transparent 60%),
-    radial-gradient(ellipse 30% 25% at 50% 50%, hsl(42 65% 72% / 0.06), transparent 70%);
+  background: linear-gradient(160deg, hsl(42 55% 96%) 0%, hsl(145 22% 96%) 45%, hsl(45 48% 97%) 100%) !important;
 }
 .theme-lebaran #produk {
   background: linear-gradient(175deg, hsl(140 18% 99%) 0%, hsl(42 25% 98%) 100%) !important;
-  position: relative;
-}
-.theme-lebaran #produk::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 60% 35% at 5% 5%, hsl(145 45% 48% / 0.09), transparent 60%),
-    radial-gradient(ellipse 50% 30% at 98% 98%, hsl(42 70% 55% / 0.09), transparent 60%);
 }
 .theme-lebaran #kontak {
   background: linear-gradient(150deg, hsl(42 45% 96%) 0%, hsl(145 18% 96%) 50%, hsl(42 40% 97%) 100%) !important;
-  position: relative;
-}
-.theme-lebaran #kontak::before {
-  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 60px; pointer-events: none; z-index: 0;
-  background: linear-gradient(to bottom, hsl(42 70% 55% / 0.08), transparent);
 }
 .theme-lebaran footer {
   background: linear-gradient(135deg, hsl(145 35% 10%) 0%, hsl(42 30% 12%) 100%) !important;
 }
-.theme-lebaran .seasonal-particle { filter: drop-shadow(0 0 5px hsl(42 85% 58% / 0.50)); }
-/* Gold shimmer on cards */
 .theme-lebaran .bg-card {
   background: linear-gradient(135deg, hsl(42 25% 100%) 0%, hsl(140 15% 99%) 100%) !important;
   border-color: hsl(42 40% 90%) !important;
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   🇮🇩  KEMERDEKAAN — Red + White + Glory
-   ════════════════════════════════════════════════════════════════════ */
-.theme-kemerdekaan #home { position: relative; }
-.theme-kemerdekaan #home::after {
-  content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
-  background: linear-gradient(to top, hsl(0 70% 30% / 0.14) 0%, transparent 100%);
-  pointer-events: none; z-index: 5;
-}
+/* 🇮🇩  KEMERDEKAAN */
 .theme-kemerdekaan #tentang {
-  background: linear-gradient(160deg,
-    hsl(0 55% 97%) 0%, hsl(0 0% 98%) 45%, hsl(0 45% 97%) 100%) !important;
-  position: relative;
-}
-.theme-kemerdekaan #tentang::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 55% 45% at 92% 8%, hsl(0 75% 55% / 0.10), transparent 65%),
-    radial-gradient(ellipse 45% 40% at 5% 92%, hsl(0 0% 85% / 0.12), transparent 60%),
-    radial-gradient(ellipse 30% 25% at 50% 50%, hsl(0 60% 70% / 0.05), transparent 70%);
+  background: linear-gradient(160deg, hsl(0 55% 97%) 0%, hsl(0 0% 98%) 45%, hsl(0 45% 97%) 100%) !important;
 }
 .theme-kemerdekaan #produk {
   background: linear-gradient(175deg, hsl(0 15% 99%) 0%, hsl(0 0% 99%) 100%) !important;
-  position: relative;
-}
-.theme-kemerdekaan #produk::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 60% 35% at 5% 5%, hsl(0 70% 60% / 0.08), transparent 60%),
-    radial-gradient(ellipse 50% 30% at 98% 98%, hsl(0 60% 55% / 0.07), transparent 60%);
 }
 .theme-kemerdekaan #kontak {
   background: linear-gradient(150deg, hsl(0 45% 97%) 0%, hsl(0 0% 98%) 50%, hsl(0 40% 97%) 100%) !important;
-  position: relative;
-}
-.theme-kemerdekaan #kontak::before {
-  content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 70px; pointer-events: none; z-index: 0;
-  background: linear-gradient(to top, hsl(0 65% 50% / 0.08), transparent);
 }
 .theme-kemerdekaan footer {
   background: linear-gradient(135deg, hsl(0 55% 10%) 0%, hsl(0 0% 10%) 100%) !important;
 }
-.theme-kemerdekaan .seasonal-particle { filter: drop-shadow(0 0 4px hsl(0 80% 60% / 0.45)); }
-/* Patriotic card tint */
 .theme-kemerdekaan .bg-card {
   background: linear-gradient(135deg, hsl(0 20% 100%) 0%, hsl(0 0% 99%) 100%) !important;
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   🎄  NATAL — Deep Red + Pine Green + Gold Star
-   ════════════════════════════════════════════════════════════════════ */
-.theme-natal #home { position: relative; }
-.theme-natal #home::after {
-  content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
-  background: linear-gradient(to top, hsl(140 45% 18% / 0.16) 0%, transparent 100%);
-  pointer-events: none; z-index: 5;
-}
+/* 🎄  NATAL */
 .theme-natal #tentang {
-  background: linear-gradient(160deg,
-    hsl(0 45% 97%) 0%, hsl(140 20% 96%) 45%, hsl(42 40% 97%) 100%) !important;
-  position: relative;
-}
-.theme-natal #tentang::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 55% 45% at 92% 8%, hsl(42 75% 55% / 0.10), transparent 65%),
-    radial-gradient(ellipse 45% 40% at 5% 92%, hsl(140 45% 35% / 0.09), transparent 60%),
-    radial-gradient(ellipse 30% 25% at 50% 50%, hsl(0 55% 65% / 0.06), transparent 70%);
+  background: linear-gradient(160deg, hsl(0 45% 97%) 0%, hsl(140 20% 96%) 45%, hsl(42 40% 97%) 100%) !important;
 }
 .theme-natal #produk {
   background: linear-gradient(175deg, hsl(0 15% 99%) 0%, hsl(140 12% 98%) 55%, hsl(42 18% 98%) 100%) !important;
-  position: relative;
-}
-.theme-natal #produk::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 60% 35% at 5% 5%, hsl(0 60% 55% / 0.08), transparent 60%),
-    radial-gradient(ellipse 50% 30% at 98% 98%, hsl(140 45% 38% / 0.08), transparent 60%);
 }
 .theme-natal #kontak {
-  background: linear-gradient(150deg,
-    hsl(140 18% 96%) 0%, hsl(42 35% 97%) 50%, hsl(0 35% 97%) 100%) !important;
-  position: relative;
-}
-.theme-natal #kontak::before {
-  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 65px; pointer-events: none; z-index: 0;
-  background: linear-gradient(to bottom, hsl(42 70% 55% / 0.08), transparent);
+  background: linear-gradient(150deg, hsl(140 18% 96%) 0%, hsl(42 35% 97%) 50%, hsl(0 35% 97%) 100%) !important;
 }
 .theme-natal footer {
   background: linear-gradient(135deg, hsl(0 50% 10%) 0%, hsl(140 40% 9%) 100%) !important;
 }
-.theme-natal .seasonal-particle { filter: drop-shadow(0 0 4px hsl(210 70% 82% / 0.50)); }
-/* Christmas card tint */
 .theme-natal .bg-card {
   background: linear-gradient(135deg, hsl(0 15% 100%) 0%, hsl(140 10% 99%) 100%) !important;
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   🌸  SEMI (SPRING) — Blossom + Fresh Green + Sky
-   ════════════════════════════════════════════════════════════════════ */
-.theme-semi #home { position: relative; }
-.theme-semi #home::after {
-  content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 110px;
-  background: linear-gradient(to top, hsl(330 45% 55% / 0.13) 0%, transparent 100%);
-  pointer-events: none; z-index: 5;
-}
+/* 🌸  SEMI (SPRING) */
 .theme-semi #tentang {
-  background: linear-gradient(160deg,
-    hsl(140 30% 96%) 0%, hsl(330 30% 97%) 45%, hsl(55 35% 97%) 100%) !important;
-  position: relative;
-}
-.theme-semi #tentang::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 55% 45% at 90% 8%, hsl(330 60% 68% / 0.11), transparent 65%),
-    radial-gradient(ellipse 45% 40% at 5% 92%, hsl(140 50% 48% / 0.10), transparent 60%),
-    radial-gradient(ellipse 30% 25% at 50% 50%, hsl(55 60% 65% / 0.07), transparent 70%);
+  background: linear-gradient(160deg, hsl(140 30% 96%) 0%, hsl(330 30% 97%) 45%, hsl(55 35% 97%) 100%) !important;
 }
 .theme-semi #produk {
   background: linear-gradient(175deg, hsl(140 15% 99%) 0%, hsl(330 15% 98%) 55%, hsl(55 20% 98%) 100%) !important;
-  position: relative;
-}
-.theme-semi #produk::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 60% 35% at 5% 5%, hsl(330 55% 65% / 0.09), transparent 60%),
-    radial-gradient(ellipse 50% 30% at 98% 98%, hsl(140 45% 45% / 0.08), transparent 60%);
 }
 .theme-semi #kontak {
-  background: linear-gradient(150deg,
-    hsl(330 30% 96%) 0%, hsl(140 25% 97%) 50%, hsl(55 30% 97%) 100%) !important;
-  position: relative;
-}
-.theme-semi #kontak::before {
-  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 60px; pointer-events: none; z-index: 0;
-  background: linear-gradient(to bottom, hsl(330 55% 68% / 0.08), transparent);
+  background: linear-gradient(150deg, hsl(330 30% 96%) 0%, hsl(140 25% 97%) 50%, hsl(55 30% 97%) 100%) !important;
 }
 .theme-semi footer {
   background: linear-gradient(135deg, hsl(140 35% 11%) 0%, hsl(330 25% 13%) 100%) !important;
 }
-.theme-semi .seasonal-particle { filter: drop-shadow(0 0 4px hsl(330 65% 70% / 0.48)); }
-/* Blossom card tint */
 .theme-semi .bg-card {
   background: linear-gradient(135deg, hsl(140 15% 100%) 0%, hsl(330 10% 99%) 100%) !important;
 }
 
-/* ════════════════════════════════════════════════════════════════════
-   🍂  GUGUR (AUTUMN) — Burnt Orange + Rust + Maple
-   ════════════════════════════════════════════════════════════════════ */
-.theme-gugur #home { position: relative; }
-.theme-gugur #home::after {
-  content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 110px;
-  background: linear-gradient(to top, hsl(22 60% 28% / 0.16) 0%, transparent 100%);
-  pointer-events: none; z-index: 5;
-}
+/* 🍂  GUGUR (AUTUMN) */
 .theme-gugur #tentang {
-  background: linear-gradient(160deg,
-    hsl(38 40% 96%) 0%, hsl(22 30% 96%) 45%, hsl(45 38% 97%) 100%) !important;
-  position: relative;
-}
-.theme-gugur #tentang::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 55% 45% at 92% 8%, hsl(22 70% 52% / 0.11), transparent 65%),
-    radial-gradient(ellipse 45% 40% at 5% 92%, hsl(38 55% 48% / 0.09), transparent 60%),
-    radial-gradient(ellipse 30% 25% at 50% 50%, hsl(8 55% 52% / 0.06), transparent 70%);
+  background: linear-gradient(160deg, hsl(38 40% 96%) 0%, hsl(22 30% 96%) 45%, hsl(45 38% 97%) 100%) !important;
 }
 .theme-gugur #produk {
   background: linear-gradient(175deg, hsl(35 22% 99%) 0%, hsl(22 18% 98%) 55%, hsl(45 20% 98%) 100%) !important;
-  position: relative;
-}
-.theme-gugur #produk::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background:
-    radial-gradient(ellipse 60% 35% at 5% 5%, hsl(22 65% 48% / 0.09), transparent 60%),
-    radial-gradient(ellipse 50% 30% at 98% 98%, hsl(38 55% 50% / 0.08), transparent 60%);
 }
 .theme-gugur #kontak {
-  background: linear-gradient(150deg,
-    hsl(22 35% 96%) 0%, hsl(38 30% 97%) 50%, hsl(45 35% 97%) 100%) !important;
-  position: relative;
-}
-.theme-gugur #kontak::before {
-  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 65px; pointer-events: none; z-index: 0;
-  background: linear-gradient(to bottom, hsl(22 65% 50% / 0.09), transparent);
+  background: linear-gradient(150deg, hsl(22 35% 96%) 0%, hsl(38 30% 97%) 50%, hsl(45 35% 97%) 100%) !important;
 }
 .theme-gugur footer {
   background: linear-gradient(135deg, hsl(22 40% 10%) 0%, hsl(38 32% 12%) 100%) !important;
 }
-.theme-gugur .seasonal-particle { filter: drop-shadow(0 0 4px hsl(22 70% 52% / 0.48)); }
-/* Warm earthy card tint */
 .theme-gugur .bg-card {
   background: linear-gradient(135deg, hsl(38 20% 100%) 0%, hsl(22 15% 99%) 100%) !important;
   border-color: hsl(22 25% 90%) !important;
