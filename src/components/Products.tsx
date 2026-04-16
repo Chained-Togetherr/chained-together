@@ -144,15 +144,16 @@ const Products = () => {
                   className="absolute inset-0 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{ background: "linear-gradient(to top, rgba(255,255,255,0.85) 0%, transparent 60%)" }}
                 >
-                  <span
+                  <a
+                    href={`/produk`}
                     className="text-xs font-medium px-3 py-1.5 rounded-full text-white"
                     style={{
                       background: "var(--btn-product-gradient)",
                       fontFamily: "DM Sans, sans-serif",
                     }}
                   >
-                    Lihat Detail →
-                  </span>
+                    Lihat Detail
+                  </a>
                 </div>
               </motion.div>
             ))}

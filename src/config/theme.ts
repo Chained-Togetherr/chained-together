@@ -1,10 +1,10 @@
 export const seasonalThemes = {
-  temaLebaran: false,       // Lebaran
+  temaLebaran: true,       // Lebaran
   temaKemerdekaan: false,   // HUT RI
   temaValentine: false,     // Valentine
   temaNatal: false,         // Natal
   temaSemi: false,          // Spring
-  temaPanas: true,          // Summer
+  temaPanas: false,          // Summer
   temaGugur: false,         // Autumn
   temaWinter: false,        // Winter
 } as const;
