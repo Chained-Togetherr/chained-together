@@ -32,6 +32,7 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
     { name: "Home", href: "#home", type: "section" },
     { name: "Tentang", href: "#tentang", type: "section" },
     { name: "Produk", href: "#produk", type: "section" },
+    { name: "Cards", href: "#loyalty", type: "section" },
     { name: "Kontak", href: "#kontak", type: "section" },
   ];
 
@@ -93,7 +94,7 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <button
-            onClick={() => navigate("/")}
+            onClick={() => handleNavClick({ name: "Home", href: "#home", type: "section" })}
             className="flex items-center gap-2.5 group"
             style={{ position: "relative", zIndex: 10000 }}
           >
