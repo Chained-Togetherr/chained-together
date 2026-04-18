@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Plus, Minus, Trash2, ShoppingBag, MessageCircle } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useToastNotification } from "@/contexts/ToastContext";
-import { formatPrice, generateWhatsAppMessage, WHATSAPP_NUMBER, getEffectivePrice, getDiscountPercentage } from "@/lib/store";
+import {
+  formatPrice,
+  generateWhatsAppMessage,
+  WHATSAPP_NUMBER,
+  getEffectivePrice,
+  getDiscountPercentage,
+} from "@/lib/store";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
 import { getActiveTheme } from "@/config/theme";
 
@@ -12,7 +18,7 @@ interface CartModalProps {
   onClose: () => void;
 }
 
-/* ── SVG icon components per theme ── */
+/* ── Static (non-animated) SVG decorations per theme ── */
 type SvgIconProps = { size?: number; style?: React.CSSProperties };
 
 const ThemeIconsMap: Record<string, React.FC<SvgIconProps>[]> = {
@@ -139,8 +145,6 @@ const ThemeIconsMap: Record<string, React.FC<SvgIconProps>[]> = {
         <path d="M30 30 Q25 60 28 75" stroke="currentColor" strokeWidth="2.5" opacity="0.7"/>
         <path d="M30 30 Q15 15 5 20" stroke="currentColor" strokeWidth="2" opacity="0.8"/>
         <path d="M30 30 Q45 15 55 20" stroke="currentColor" strokeWidth="2" opacity="0.8"/>
-        <path d="M30 30 Q18 22 8 28" stroke="currentColor" strokeWidth="1.8" opacity="0.6"/>
-        <path d="M30 30 Q42 22 52 28" stroke="currentColor" strokeWidth="1.8" opacity="0.6"/>
       </svg>
     ),
   ],
@@ -213,14 +217,15 @@ const ThemeIconsMap: Record<string, React.FC<SvgIconProps>[]> = {
 };
 
 const CartModal = ({ isOpen, onClose }: CartModalProps) => {
-  const { cart, updateQuantity, removeFromCart, clearCart, getTotalPrice } = useCart();
+  const { cart, updateQuantity, removeFromCart, clearCart, getTotalPrice } =
+    useCart();
   const { showToast } = useToastNotification();
   const activeTheme = getActiveTheme();
   const themeIcons = ThemeIconsMap[activeTheme] || ThemeIconsMap.default;
 
   useScrollLock(isOpen);
 
-  const handleCheckout = () => {
+  const handleCheckout = useCallback(() => {
     if (cart.length === 0) {
       showToast("Keranjang masih kosong!", "error");
       return;
@@ -230,12 +235,15 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
     clearCart();
     onClose();
     showToast("Pesanan dikirim ke WhatsApp!", "success");
-  };
+  }, [cart, clearCart, onClose, showToast]);
 
-  const handleRemove = (productId: number, variant: any, productName: string) => {
-    removeFromCart(productId, variant);
-    showToast(`${productName} dihapus dari keranjang`, "info");
-  };
+  const handleRemove = useCallback(
+    (productId: number, variant: any, productName: string) => {
+      removeFromCart(productId, variant);
+      showToast(`${productName} dihapus dari keranjang`, "info");
+    },
+    [removeFromCart, showToast]
+  );
 
   return (
     <AnimatePresence>
@@ -246,6 +254,7 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
             onClick={onClose}
             className="fixed inset-0 bg-black/50 backdrop-blur-sm"
             style={{ zIndex: 10001 }}
@@ -256,27 +265,28 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 28, stiffness: 220 }}
+            transition={{ type: "tween", duration: 0.28, ease: [0.32, 0, 0.18, 1] }}
             className="fixed right-0 top-0 bottom-0 w-full max-w-md shadow-2xl flex flex-col overflow-hidden"
             style={{ zIndex: 10002, background: "hsl(var(--modal-bg))" }}
           >
-            {/* Theme floating SVG decorations */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+            {/* Theme static decorations — no animation loop, GPU-friendly */}
+            <div
+              className="absolute inset-0 pointer-events-none overflow-hidden"
+              style={{ zIndex: 0 }}
+            >
               {themeIcons.map((IconComponent, i) => (
-                <motion.div
+                <div
                   key={i}
-                  className="absolute text-primary/20"
+                  className="absolute text-primary/[0.07]"
                   style={{
-                    top: `${15 + i * 28}%`,
-                    right: `${5 + i * 8}%`,
+                    top: `${18 + i * 28}%`,
+                    right: `${6 + i * 9}%`,
                     width: "48px",
                     height: "48px",
                   }}
-                  animate={{ y: [0, -12, 0], rotate: [0, 6, -6, 0] }}
-                  transition={{ duration: 4 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
                 >
                   <IconComponent size={48} />
-                </motion.div>
+                </div>
               ))}
               <div
                 className="absolute -top-20 -right-20 w-40 h-40 rounded-full opacity-[0.06] blur-3xl"
@@ -298,11 +308,17 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                   className="w-8 h-8 rounded-xl flex items-center justify-center"
                   style={{ background: "hsl(var(--modal-accent-bg) / 0.12)" }}
                 >
-                  <ShoppingBag className="w-4 h-4" style={{ color: "hsl(var(--modal-accent-bg))" }} />
+                  <ShoppingBag
+                    className="w-4 h-4"
+                    style={{ color: "hsl(var(--modal-accent-bg))" }}
+                  />
                 </div>
                 <h2
                   className="text-xl text-foreground font-medium"
-                  style={{ fontFamily: "Cormorant Garamond, Georgia, serif", fontSize: "1.35rem" }}
+                  style={{
+                    fontFamily: "Cormorant Garamond, Georgia, serif",
+                    fontSize: "1.35rem",
+                  }}
                 >
                   Keranjang
                 </h2>
@@ -321,29 +337,45 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
               </div>
               <button
                 onClick={onClose}
-                className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-full transition-all"
+                className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-full transition-colors duration-150"
+                style={{ WebkitTapHighlightColor: "transparent" }}
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Cart Items — scrollable */}
-            <div className="flex-1 overflow-y-auto px-6 py-5 relative" style={{ zIndex: 1 }}>
+            <div
+              className="flex-1 overflow-y-auto px-6 py-5 relative"
+              style={{ zIndex: 1, overscrollBehavior: "contain", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+            >
               {cart.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center">
                   <div
                     className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4"
                     style={{ background: "hsl(var(--modal-accent-bg) / 0.08)" }}
                   >
-                    <ShoppingBag className="w-8 h-8" style={{ color: "hsl(var(--modal-accent-bg))" }} />
+                    <ShoppingBag
+                      className="w-8 h-8"
+                      style={{ color: "hsl(var(--modal-accent-bg))" }}
+                    />
                   </div>
-                  <p className="text-foreground font-medium text-sm" style={{ fontFamily: "Cormorant Garamond, Georgia, serif", fontSize: "1.05rem" }}>
+                  <p
+                    className="text-foreground font-medium text-sm"
+                    style={{
+                      fontFamily: "Cormorant Garamond, Georgia, serif",
+                      fontSize: "1.05rem",
+                    }}
+                  >
                     Keranjang masih kosong
                   </p>
-                  <p className="text-xs text-muted-foreground mt-1.5" style={{ fontFamily: "DM Sans, sans-serif" }}>
+                  <p
+                    className="text-xs text-muted-foreground mt-1.5"
+                    style={{ fontFamily: "DM Sans, sans-serif" }}
+                  >
                     Yuk, tambahkan produk favoritmu!
                   </p>
-                  <div className="mt-5 flex gap-3 items-center justify-center opacity-25 text-primary">
+                  <div className="mt-5 flex gap-3 items-center justify-center opacity-20 text-primary">
                     {themeIcons.map((IconComponent, i) => (
                       <IconComponent key={i} size={24} />
                     ))}
@@ -352,11 +384,8 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
               ) : (
                 <div className="space-y-3">
                   {cart.map((item, index) => (
-                    <motion.div
+                    <div
                       key={`${item.product.id}-${item.variant.letter}-${item.variant.hasBell}`}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.07 }}
                       className="flex gap-4 p-4 rounded-2xl border border-border/60"
                       style={{ background: "hsl(var(--modal-item-bg))" }}
                     >
@@ -364,12 +393,16 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                         src={item.product.image}
                         alt={item.product.name}
                         className="rounded-xl object-cover flex-shrink-0"
+                        loading="lazy"
                         style={{ width: "72px", height: "72px" }}
                       />
                       <div className="flex-1 min-w-0">
                         <h4
                           className="font-medium text-foreground truncate"
-                          style={{ fontFamily: "Cormorant Garamond, Georgia, serif", fontSize: "1rem" }}
+                          style={{
+                            fontFamily: "Cormorant Garamond, Georgia, serif",
+                            fontSize: "1rem",
+                          }}
                         >
                           {item.product.name}
                         </h4>
@@ -390,7 +423,8 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                             <span
                               className="text-[10px] px-2 py-0.5 rounded-full"
                               style={{
-                                background: "hsl(var(--modal-badge-letter-bg) / 0.10)",
+                                background:
+                                  "hsl(var(--modal-badge-letter-bg) / 0.10)",
                                 color: "hsl(var(--modal-badge-letter-bg))",
                                 fontFamily: "DM Sans, sans-serif",
                                 letterSpacing: "0.04em",
@@ -403,7 +437,8 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                             <span
                               className="text-[10px] px-2 py-0.5 rounded-full"
                               style={{
-                                background: "hsl(var(--modal-badge-bell-bg) / 0.5)",
+                                background:
+                                  "hsl(var(--modal-badge-bell-bg) / 0.5)",
                                 color: "hsl(var(--modal-badge-bell-text))",
                                 fontFamily: "DM Sans, sans-serif",
                               }}
@@ -415,35 +450,70 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                         <div className="flex items-center justify-between mt-3">
                           <div className="flex items-center gap-1.5">
                             <button
-                              onClick={() => updateQuantity(item.product.id, item.variant, item.quantity - 1)}
+                              onClick={() =>
+                                updateQuantity(
+                                  item.product.id,
+                                  item.variant,
+                                  item.quantity - 1
+                                )
+                              }
                               className="w-7 h-7 flex items-center justify-center rounded-lg border border-border hover:border-primary transition-colors text-muted-foreground hover:text-foreground"
-                              style={{ background: "hsl(var(--modal-bg))" }}
+                              style={{
+                                background: "hsl(var(--modal-bg))",
+                                WebkitTapHighlightColor: "transparent",
+                              }}
                             >
                               <Minus className="w-3 h-3" />
                             </button>
-                            <span className="w-6 text-center font-medium text-sm" style={{ fontFamily: "DM Sans, sans-serif" }}>
+                            <span
+                              className="w-6 text-center font-medium text-sm"
+                              style={{ fontFamily: "DM Sans, sans-serif" }}
+                            >
                               {item.quantity}
                             </span>
                             <button
-                              onClick={() => updateQuantity(item.product.id, item.variant, item.quantity + 1)}
+                              onClick={() =>
+                                updateQuantity(
+                                  item.product.id,
+                                  item.variant,
+                                  item.quantity + 1
+                                )
+                              }
                               className="w-7 h-7 flex items-center justify-center rounded-lg border border-border hover:border-primary transition-colors text-muted-foreground hover:text-foreground"
-                              style={{ background: "hsl(var(--modal-bg))" }}
+                              style={{
+                                background: "hsl(var(--modal-bg))",
+                                WebkitTapHighlightColor: "transparent",
+                              }}
                             >
                               <Plus className="w-3 h-3" />
                             </button>
                           </div>
                           <button
-                            onClick={() => handleRemove(item.product.id, item.variant, item.product.name)}
+                            onClick={() =>
+                              handleRemove(
+                                item.product.id,
+                                item.variant,
+                                item.product.name
+                              )
+                            }
                             className="p-1.5 text-muted-foreground hover:text-destructive hover:bg-destructive/8 rounded-lg transition-colors"
+                            style={{ WebkitTapHighlightColor: "transparent" }}
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                         {item.product.discount && item.product.discountPrice ? (
                           <div className="mt-2 flex items-center gap-2">
-                            <span className="text-xs line-through text-muted-foreground/50" style={{ fontFamily: "DM Sans, sans-serif" }}>
+                            <span
+                              className="text-xs line-through text-muted-foreground/50"
+                              style={{ fontFamily: "DM Sans, sans-serif" }}
+                            >
                               {formatPrice(
-                                (item.product.price + (item.variant.hasBell && item.product.bellPrice ? item.product.bellPrice : 0)) * item.quantity
+                                (item.product.price +
+                                  (item.variant.hasBell && item.product.bellPrice
+                                    ? item.product.bellPrice
+                                    : 0)) *
+                                  item.quantity
                               )}
                             </span>
                             <span
@@ -472,7 +542,7 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                           </p>
                         )}
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               )}
@@ -487,10 +557,15 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                 {/* Theme accent line */}
                 <div
                   className="absolute top-0 left-6 right-6 h-[2px] rounded-full"
-                  style={{ background: `linear-gradient(90deg, transparent, hsl(var(--modal-accent-bg) / 0.3), transparent)` }}
+                  style={{
+                    background: `linear-gradient(90deg, transparent, hsl(var(--modal-accent-bg) / 0.3), transparent)`,
+                  }}
                 />
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm text-muted-foreground" style={{ fontFamily: "DM Sans, sans-serif" }}>
+                  <span
+                    className="text-sm text-muted-foreground"
+                    style={{ fontFamily: "DM Sans, sans-serif" }}
+                  >
                     Total Pembayaran
                   </span>
                   <span
@@ -505,22 +580,22 @@ const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                     {formatPrice(getTotalPrice())}
                   </span>
                 </div>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
+                <button
                   onClick={handleCheckout}
-                  className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-2xl font-medium text-sm transition-all duration-300"
+                  className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-2xl font-medium text-sm active:scale-[0.98] transition-transform duration-100"
                   style={{
                     background: "linear-gradient(135deg, #25d366, #128c7e)",
                     color: "#fff",
                     boxShadow: "0 4px 20px -4px rgba(37, 211, 102, 0.45)",
                     fontFamily: "DM Sans, sans-serif",
                     letterSpacing: "0.03em",
+                    WebkitTapHighlightColor: "transparent",
+                    touchAction: "manipulation",
                   }}
                 >
                   <MessageCircle className="w-4 h-4" />
                   Checkout via WhatsApp
-                </motion.button>
+                </button>
               </div>
             )}
           </motion.div>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -18,15 +18,37 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
   const location = useLocation();
   const isProductsPage = location.pathname === "/produk";
 
+  // Throttled scroll handler
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", handleScroll);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 30);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
+
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
 
   const navLinks = [
     { name: "Home", href: "#home", type: "section" },
@@ -36,36 +58,33 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
     { name: "Kontak", href: "#kontak", type: "section" },
   ];
 
-  const scrollToSection = (href: string) => {
+  const scrollToSection = useCallback((href: string) => {
     const element = document.querySelector(href);
     if (!element) return;
     const navbarHeight = 80;
     const elementPosition =
       element.getBoundingClientRect().top + window.pageYOffset;
     window.scrollTo({ top: elementPosition - navbarHeight, behavior: "smooth" });
-  };
+  }, []);
 
-  const handleNavClick = (link: { name: string; href: string; type: string }) => {
-    // Close mobile menu
-    setIsMobileMenuOpen(false);
+  const handleNavClick = useCallback(
+    (link: { name: string; href: string; type: string }) => {
+      setIsMobileMenuOpen(false);
 
-    if (link.type === "route") {
-      navigate(link.href);
-      return;
-    }
+      if (link.type === "route") {
+        navigate(link.href);
+        return;
+      }
 
-    if (isProductsPage) {
-      navigate("/");
-      setTimeout(() => {
-        scrollToSection(link.href);
-      }, 400);
-    } else {
-      // Small delay to let menu close animation start, then scroll
-      setTimeout(() => {
-        scrollToSection(link.href);
-      }, 50);
-    }
-  };
+      if (isProductsPage) {
+        navigate("/");
+        setTimeout(() => scrollToSection(link.href), 400);
+      } else {
+        setTimeout(() => scrollToSection(link.href), 50);
+      }
+    },
+    [isProductsPage, navigate, scrollToSection]
+  );
 
   const isLight = isProductsPage && !isScrolled;
   const navBg = isScrolled
@@ -94,7 +113,9 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <button
-            onClick={() => handleNavClick({ name: "Home", href: "#home", type: "section" })}
+            onClick={() =>
+              handleNavClick({ name: "Home", href: "#home", type: "section" })
+            }
             className="flex items-center gap-2.5 group"
             style={{ position: "relative", zIndex: 10000 }}
           >
@@ -155,53 +176,61 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`md:hidden p-2 transition-colors duration-300 ${iconColor}`}
               aria-label="Toggle menu"
+              style={{ WebkitTapHighlightColor: "transparent" }}
             >
-              {isMobileMenuOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
+              {/* CSS-based icon swap — no AnimatePresence needed */}
+              <span className="relative block w-5 h-5">
+                <Menu
+                  className="w-5 h-5 absolute inset-0 transition-all duration-200"
+                  style={{
+                    opacity: isMobileMenuOpen ? 0 : 1,
+                    transform: isMobileMenuOpen ? "rotate(90deg) scale(0.7)" : "rotate(0deg) scale(1)",
+                  }}
+                />
+                <X
+                  className="w-5 h-5 absolute inset-0 transition-all duration-200"
+                  style={{
+                    opacity: isMobileMenuOpen ? 1 : 0,
+                    transform: isMobileMenuOpen ? "rotate(0deg) scale(1)" : "rotate(-90deg) scale(0.7)",
+                  }}
+                />
+              </span>
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25, ease: "easeInOut" }}
-              className="md:hidden overflow-hidden"
-              style={{ position: "relative", zIndex: 9999 }}
-            >
-              <div className={`py-4 space-y-1 border-t mt-1 ${mobileMenuBorder}`}>
-                {navLinks.map((link, index) => (
-                  <motion.button
-                    key={link.name}
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.07 }}
-                    onClick={() => handleNavClick(link)}
-                    className={`block w-full text-left px-4 py-3 rounded-xl transition-all ${mobileLinkColor}`}
-                    style={{
-                      fontFamily: "DM Sans, sans-serif",
-                      fontSize: "0.72rem",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      WebkitTapHighlightColor: "transparent",
-                      touchAction: "manipulation",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {link.name}
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Mobile Menu — CSS-only open/close, zero JS animation overhead */}
+        <div
+          className="md:hidden overflow-hidden"
+          style={{
+            maxHeight: isMobileMenuOpen ? "320px" : "0px",
+            opacity: isMobileMenuOpen ? 1 : 0,
+            transition: "max-height 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.22s ease",
+            position: "relative",
+            zIndex: 9999,
+          }}
+        >
+          <div className={`py-4 space-y-1 border-t mt-1 ${mobileMenuBorder}`}>
+            {navLinks.map((link) => (
+              <button
+                key={link.name}
+                onClick={() => handleNavClick(link)}
+                className={`block w-full text-left px-4 py-3 rounded-xl transition-colors duration-150 ${mobileLinkColor}`}
+                style={{
+                  fontFamily: "DM Sans, sans-serif",
+                  fontSize: "0.72rem",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  WebkitTapHighlightColor: "transparent",
+                  touchAction: "manipulation",
+                  cursor: "pointer",
+                }}
+              >
+                {link.name}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </nav>
   );
