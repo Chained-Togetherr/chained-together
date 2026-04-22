@@ -51,9 +51,7 @@ const Footer = () => {
             className="flex items-center gap-1.5 text-white/45 text-xs"
             style={{ fontFamily: "DM Sans, sans-serif" }}
           >
-            © {currentYear} Chained Together · Made with
-            <Heart className="w-3 h-3 text-pink-400 fill-pink-400" />
-            in Indonesia
+            © {currentYear} Chained Together · Made in Indonesia
           </p>
         </div>
       </div>

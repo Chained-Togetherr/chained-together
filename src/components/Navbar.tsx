@@ -55,6 +55,7 @@ const Navbar = ({ onCartClick }: NavbarProps) => {
     { name: "Tentang", href: "#tentang", type: "section" },
     { name: "Produk", href: "#produk", type: "section" },
     { name: "Cards", href: "#loyalty", type: "section" },
+    { name: "Galeri", href: "#showcase", type: "section" },
     { name: "Kontak", href: "#kontak", type: "section" },
   ];
 
