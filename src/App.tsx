@@ -6,10 +6,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import { ToastProvider } from "@/contexts/ToastContext";
 import { getActiveTheme, getThemeData } from "@/config/theme";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Index from "./pages/Index";
 import ProductsPage from "./pages/ProductsPage";
 import NotFound from "./pages/NotFound";
+import LoadingScreen from "./components/LoadingScreen";
 
 const queryClient = new QueryClient();
 
@@ -36,26 +37,35 @@ const ThemeApplicator = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <CartProvider>
-          <ToastProvider>
-            <ThemeApplicator>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/produk" element={<ProductsPage />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </ThemeApplicator>
-          </ToastProvider>
-        </CartProvider>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+
+        {!loaded && (
+          <LoadingScreen duration={2500} onComplete={() => setLoaded(true)} />
+        )}
+
+        <BrowserRouter>
+          <CartProvider>
+            <ToastProvider>
+              <ThemeApplicator>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/produk" element={<ProductsPage />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </ThemeApplicator>
+            </ToastProvider>
+          </CartProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
