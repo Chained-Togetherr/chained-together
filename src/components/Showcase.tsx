@@ -127,7 +127,7 @@ const Showcase = () => {
         >
           <span className="section-label mb-5 inline-flex items-center gap-1.5">
             <Camera className="w-3 h-3" />
-            Momen Kami
+            Gallery
           </span>
           <h2
             className="text-4xl md:text-5xl lg:text-6xl font-light text-foreground mt-5"
@@ -136,7 +136,7 @@ const Showcase = () => {
               letterSpacing: "-0.02em",
             }}
           >
-            Karya &amp; <em>Kenangan</em>
+            Produk Kami
           </h2>
           <p
             className="mt-4 text-muted-foreground max-w-md mx-auto text-sm leading-relaxed"
